@@ -4,13 +4,39 @@
   
     
     <entry>
+      <title><![CDATA[inside mysql notes]]></title>
+      <url>https://scai2013.github.io/2016/08/27/inside-mysql-notes/</url>
+      <content type="html"><![CDATA[<h3 id="mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0"><a href="#mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0" class="headerlink" title="mysql技术内幕sql编程笔记"></a>mysql技术内幕sql编程笔记</h3><h4 id="01__u7B2C_u4E00_u7AE0"><a href="#01__u7B2C_u4E00_u7AE0" class="headerlink" title="01 第一章"></a>01 第一章</h4><h4 id="1-_OLTP__u4E0EOLAP"><a href="#1-_OLTP__u4E0EOLAP" class="headerlink" title="1. OLTP 与OLAP"></a>1. OLTP 与OLAP</h4><p>OLTP主要执行基本的、日常的事务处理，一般特点为：  </p>
+<ul>
+<li>实时性要求高  </li>
+<li>查询数据量比较小  </li>
+<li>交易一般是确定的  </li>
+<li>并发性要求高<br>OLAP是数据仓库系统的主要应用，典型的应用就是复杂的报表系统。一般物点为：</li>
+<li>实时性要求不是很高  </li>
+<li>数据量大</li>
+<li>重点在于决策支持，所以查询一般是动态的，即允许用户随时提出查询的特定要求。</li>
+</ul>
+<p><img src="01.png" alt="OLTP 与 OLAP 的区别" title="OLTP 与 OLAP 的区别"></p>
+<h4 id="2-_Mysql__u7684_u4F53_u7CFB_u7ED3_u6784"><a href="#2-_Mysql__u7684_u4F53_u7CFB_u7ED3_u6784" class="headerlink" title="2. Mysql 的体系结构"></a>2. Mysql 的体系结构</h4><p>mysql数据库由以下部分组成：</p>
+<ul>
+<li>连接池组件(connection pool)  </li>
+<li>管理服务和工具组件(Management Services &amp; Utilities)  </li>
+<li>SQL 接口组件(SQL interface)  </li>
+<li>查询分析器组件(Parser)  </li>
+<li>优化器组件(Optionmizer) </li>
+<li>缓冲组件(Caches &amp; Buffers)  </li>
+<li>插件式存储引擎(Pluggable Storage Engines)  </li>
+<li>物理文件(File System)<br><img src="02.png" alt="" title="mysql 体系结构图"></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[nexus 更新索引]]></title>
       <url>https://scai2013.github.io/2016/08/24/nexus-tutorials/</url>
-      <content type="html"><![CDATA[<p>#nexus 更新索引解决<br>nexus更新索引方式有两种：</p>
-<p>###1. 在线更新索引</p>
-<p>安装配置完成Nexus后，电脑联网状态下，Nexus会自动下载索引文件。下载好的索引文件存放在目录：sonatype-work\nexus\indexer,但由于下载速度慢、容量大，往往会以失败告终。</p>
-<p>###2. 手动更新索引</p>
-<p>2.1 首先准备以下几个文件：</p>
+      <content type="html"><![CDATA[<h1 id="nexus__u66F4_u65B0_u7D22_u5F15_u89E3_u51B3"><a href="#nexus__u66F4_u65B0_u7D22_u5F15_u89E3_u51B3" class="headerlink" title="nexus 更新索引解决"></a>nexus 更新索引解决</h1><p>nexus更新索引方式有两种：</p>
+<h3 id="1-__u5728_u7EBF_u66F4_u65B0_u7D22_u5F15"><a href="#1-__u5728_u7EBF_u66F4_u65B0_u7D22_u5F15" class="headerlink" title="1. 在线更新索引"></a>1. 在线更新索引</h3><p>安装配置完成Nexus后，电脑联网状态下，Nexus会自动下载索引文件。下载好的索引文件存放在目录：sonatype-work\nexus\indexer,但由于下载速度慢、容量大，往往会以失败告终。</p>
+<h3 id="2-__u624B_u52A8_u66F4_u65B0_u7D22_u5F15"><a href="#2-__u624B_u52A8_u66F4_u65B0_u7D22_u5F15" class="headerlink" title="2. 手动更新索引"></a>2. 手动更新索引</h3><p>2.1 首先准备以下几个文件：</p>
 <ul>
 <li><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.apache.maven.indexer" target="_blank" rel="external">indexer-cli-5.1.1.jar</a>  </li>
 <li><a href="http://repo1.maven.org/maven2/.index/nexus-maven-repository-index.zip" target="_blank" rel="external">nexus-maven-repository-index.gz</a>  </li>
@@ -19,8 +45,7 @@
 <p>注： <code>indexer-cli-5.1.1.jar</code> 进入 <a href="http://search.maven.org/" target="_blank" rel="external">http://search.maven.org/</a><br>后输入关键字<code>org.apache.maven.indexer</code>进行搜索，如下图，找到相关的jar包进行下载。<br><img src="nexus_imges/001.png" alt=""></p>
 <p>2.2<br>1). 下载完成后把三个文件放在同一个文件路径下面，从cmd进入到这个路径里，输入命令：<br><strong>java -jar indexer-cli-5.1.1.jar -u nexus-maven-repository-index.gz -d indexer</strong><br>执行完之后，把indexer文件夹下的所有内容都复制到<strong>%nexus-home%\sonatype-work\nexus\indexer\central-ctx</strong>下面。<br>2). 重新启动nexus，进入管理界面，选择central-&gt;Browse Index，就看到更新的索引了。</p>
 <p><strong>注意</strong>：nexus是需要重新启动的，我是在做上面的所有步骤之前，先停掉nexus，等上面四个步骤完成之后，再启动nexus的。</p>
-<p>###3. 代理服务器更新索引   </p>
-<blockquote>
+<h3 id="3-__u4EE3_u7406_u670D_u52A1_u5668_u66F4_u65B0_u7D22_u5F15"><a href="#3-__u4EE3_u7406_u670D_u52A1_u5668_u66F4_u65B0_u7D22_u5F15" class="headerlink" title="3. 代理服务器更新索引"></a>3. 代理服务器更新索引</h3><blockquote>
 <p>以下参考地址：<a href="http://my.oschina.net/u/811979/blog/373416" target="_blank" rel="external">http://my.oschina.net/u/811979/blog/373416</a></p>
 </blockquote>
 <p>3.1 同样下载以下两个文件  </p>

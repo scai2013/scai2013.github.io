@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mysql,sql," />
 
 
 
@@ -84,19 +84,52 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="mysql技术内幕sql编程笔记01 第一章1. OLTP 与OLAPOLTP主要执行基本的、日常的事务处理，一般特点为：  
+
+实时性要求高  
+查询数据量比较小  
+交易一般是确定的  
+并发性要求高OLAP是数据仓库系统的主要应用，典型的应用就是复杂的报表系统。一般物点为：
+实时性要求不是很高  
+数据量大
+重点在于决策支持，所以查询一般是动态的，即允许用户随时提出查询的特定要求。
+
+
+2.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://scai2013.github.io/2016/02/02/hello-world/index.html">
+<meta property="og:title" content="inside mysql notes">
+<meta property="og:url" content="https://scai2013.github.io/2016/08/27/inside-mysql-notes/index.html">
 <meta property="og:site_name" content="小蔡的日志">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2015-12-18T05:41:31.790Z">
+<meta property="og:description" content="mysql技术内幕sql编程笔记01 第一章1. OLTP 与OLAPOLTP主要执行基本的、日常的事务处理，一般特点为：  
+
+实时性要求高  
+查询数据量比较小  
+交易一般是确定的  
+并发性要求高OLAP是数据仓库系统的主要应用，典型的应用就是复杂的报表系统。一般物点为：
+实时性要求不是很高  
+数据量大
+重点在于决策支持，所以查询一般是动态的，即允许用户随时提出查询的特定要求。
+
+
+2.">
+<meta property="og:image" content="https://scai2013.github.io/01.png">
+<meta property="og:image" content="https://scai2013.github.io/02.png">
+<meta property="og:updated_time" content="2016-09-27T02:42:03.124Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="inside mysql notes">
+<meta name="twitter:description" content="mysql技术内幕sql编程笔记01 第一章1. OLTP 与OLAPOLTP主要执行基本的、日常的事务处理，一般特点为：  
+
+实时性要求高  
+查询数据量比较小  
+交易一般是确定的  
+并发性要求高OLAP是数据仓库系统的主要应用，典型的应用就是复杂的报表系统。一般物点为：
+实时性要求不是很高  
+数据量大
+重点在于决策支持，所以查询一般是动态的，即允许用户随时提出查询的特定要求。
+
+
+2.">
+<meta name="twitter:image" content="https://scai2013.github.io/01.png">
 
 
 
@@ -117,9 +150,9 @@ Quick">
 
 
 
-  <link rel="canonical" href="https://scai2013.github.io/2016/02/02/hello-world/"/>
+  <link rel="canonical" href="https://scai2013.github.io/2016/08/27/inside-mysql-notes/"/>
 
-  <title> Hello World | 小蔡的日志 </title>
+  <title> inside mysql notes | 小蔡的日志 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +295,7 @@ Quick">
             
             
               
-                Hello World
+                inside mysql notes
               
             
           </h1>
@@ -274,8 +307,8 @@ Quick">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-02T15:33:17+08:00" content="2016-02-02">
-              2016-02-02
+            <time itemprop="dateCreated" datetime="2016-08-27T10:39:50+08:00" content="2016-08-27">
+              2016-08-27
             </time>
           </span>
 
@@ -285,8 +318,8 @@ Quick">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/02/02/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/02/hello-world/" itemprop="commentsCount"></span>
+                <a href="/2016/08/27/inside-mysql-notes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/inside-mysql-notes/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -309,15 +342,28 @@ Quick">
       
 
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h3 id="mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0"><a href="#mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0" class="headerlink" title="mysql技术内幕sql编程笔记"></a>mysql技术内幕sql编程笔记</h3><h4 id="01__u7B2C_u4E00_u7AE0"><a href="#01__u7B2C_u4E00_u7AE0" class="headerlink" title="01 第一章"></a>01 第一章</h4><h4 id="1-_OLTP__u4E0EOLAP"><a href="#1-_OLTP__u4E0EOLAP" class="headerlink" title="1. OLTP 与OLAP"></a>1. OLTP 与OLAP</h4><p>OLTP主要执行基本的、日常的事务处理，一般特点为：  </p>
+<ul>
+<li>实时性要求高  </li>
+<li>查询数据量比较小  </li>
+<li>交易一般是确定的  </li>
+<li>并发性要求高<br>OLAP是数据仓库系统的主要应用，典型的应用就是复杂的报表系统。一般物点为：</li>
+<li>实时性要求不是很高  </li>
+<li>数据量大</li>
+<li>重点在于决策支持，所以查询一般是动态的，即允许用户随时提出查询的特定要求。</li>
+</ul>
+<p><img src="01.png" alt="OLTP 与 OLAP 的区别" title="OLTP 与 OLAP 的区别"></p>
+<h4 id="2-_Mysql__u7684_u4F53_u7CFB_u7ED3_u6784"><a href="#2-_Mysql__u7684_u4F53_u7CFB_u7ED3_u6784" class="headerlink" title="2. Mysql 的体系结构"></a>2. Mysql 的体系结构</h4><p>mysql数据库由以下部分组成：</p>
+<ul>
+<li>连接池组件(connection pool)  </li>
+<li>管理服务和工具组件(Management Services &amp; Utilities)  </li>
+<li>SQL 接口组件(SQL interface)  </li>
+<li>查询分析器组件(Parser)  </li>
+<li>优化器组件(Optionmizer) </li>
+<li>缓冲组件(Caches &amp; Buffers)  </li>
+<li>插件式存储引擎(Pluggable Storage Engines)  </li>
+<li>物理文件(File System)<br><img src="02.png" alt="" title="mysql 体系结构图"></li>
+</ul>
 
       
     </div>
@@ -338,18 +384,26 @@ Quick">
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag">#mysql</a>
+          
+            <a href="/tags/sql/" rel="tag">#sql</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/08/24/nexus-tutorials/" rel="next" title="nexus 更新索引">
+                <i class="fa fa-chevron-left"></i> nexus 更新索引
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/24/nexus-tutorials/" rel="prev" title="nexus 更新索引">
-                nexus 更新索引 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -375,8 +429,8 @@ Quick">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/02/02/hello-world/"
-           data-title="Hello World" data-url="https://scai2013.github.io/2016/02/02/hello-world/">
+      <div class="ds-thread" data-thread-key="2016/08/27/inside-mysql-notes/"
+           data-title="inside mysql notes" data-url="https://scai2013.github.io/2016/08/27/inside-mysql-notes/">
       </div>
     
   </div>
@@ -460,7 +514,7 @@ Quick">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick_Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create_a_new_post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run_server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate_static_files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy_to_remote_sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0"><span class="nav-number">1.</span> <span class="nav-text">mysql技术内幕sql编程笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#01__u7B2C_u4E00_u7AE0"><span class="nav-number">1.1.</span> <span class="nav-text">01 第一章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-_OLTP__u4E0EOLAP"><span class="nav-number">1.2.</span> <span class="nav-text">1. OLTP 与OLAP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-_Mysql__u7684_u4F53_u7CFB_u7ED3_u6784"><span class="nav-number">1.3.</span> <span class="nav-text">2. Mysql 的体系结构</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
