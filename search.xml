@@ -24,7 +24,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[inside mysql notes]]></title>
+      <title><![CDATA[mysql技术内幕笔记-01]]></title>
       <url>https://scai2013.github.io/2016/08/27/inside-mysql-notes/</url>
       <content type="html"><![CDATA[<h3 id="mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0"><a href="#mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0" class="headerlink" title="mysql技术内幕sql编程笔记"></a>mysql技术内幕sql编程笔记</h3><h4 id="01__u7B2C_u4E00_u7AE0"><a href="#01__u7B2C_u4E00_u7AE0" class="headerlink" title="01 第一章"></a>01 第一章</h4><h4 id="1-_OLTP__u4E0EOLAP"><a href="#1-_OLTP__u4E0EOLAP" class="headerlink" title="1. OLTP 与OLAP"></a>1. OLTP 与OLAP</h4><p>OLTP主要执行基本的、日常的事务处理，一般特点为：  </p>
 <ul>
@@ -62,7 +62,7 @@
 <li><a href="http://repo1.maven.org/maven2/.index/nexus-maven-repository-index.zip" target="_blank" rel="external">nexus-maven-repository-index.gz</a>  </li>
 <li><a href="http://repo1.maven.org/maven2/.index/nexus-maven-repository-index.properties" target="_blank" rel="external">nexus-maven-repository-index.properties</a></li>
 </ul>
-<p>注： <code>indexer-cli-5.1.1.jar</code> 进入 <a href="http://search.maven.org/" target="_blank" rel="external">http://search.maven.org/</a><br>后输入关键字<code>org.apache.maven.indexer</code>进行搜索，如下图，找到相关的jar包进行下载。<br><img src="nexus_imges/001.png" alt=""></p>
+<p>注： <code>indexer-cli-5.1.1.jar</code> 进入 <a href="http://search.maven.org/" target="_blank" rel="external">http://search.maven.org/</a><br>后输入关键字<code>org.apache.maven.indexer</code>进行搜索，如下图，找到相关的jar包进行下载。<br><img src="/images/001.png" alt=""></p>
 <p>2.2<br>1). 下载完成后把三个文件放在同一个文件路径下面，从cmd进入到这个路径里，输入命令：<br><strong>java -jar indexer-cli-5.1.1.jar -u nexus-maven-repository-index.gz -d indexer</strong><br>执行完之后，把indexer文件夹下的所有内容都复制到<strong>%nexus-home%\sonatype-work\nexus\indexer\central-ctx</strong>下面。<br>2). 重新启动nexus，进入管理界面，选择central-&gt;Browse Index，就看到更新的索引了。</p>
 <p><strong>注意</strong>：nexus是需要重新启动的，我是在做上面的所有步骤之前，先停掉nexus，等上面四个步骤完成之后，再启动nexus的。</p>
 <h3 id="3-__u4EE3_u7406_u670D_u52A1_u5668_u66F4_u65B0_u7D22_u5F15"><a href="#3-__u4EE3_u7406_u670D_u52A1_u5668_u66F4_u65B0_u7D22_u5F15" class="headerlink" title="3. 代理服务器更新索引"></a>3. 代理服务器更新索引</h3><blockquote>
