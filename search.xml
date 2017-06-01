@@ -4,6 +4,182 @@
   
     
     <entry>
+      <title><![CDATA[elasticsearch 笔记]]></title>
+      <url>https://scai2013.github.io/2017/06/01/elasticsearch-%E7%AC%94%E8%AE%B0/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p><a href="https://github.com/mobz/elasticsearch-head#running-with-built-in-server" title="插件地址：github" target="_blank" rel="external">elasticsearch-head 插件地址：github</a> </p>
+</blockquote>
+<p>There are multiple ways of running elasticsearch-head.</p>
+<p>##Running with built in server</p>
+<ul>
+<li>git clone git://github.com/mobz/elasticsearch-head.git</li>
+<li>cd elasticsearch-head</li>
+<li>npm install</li>
+<li>npm run start</li>
+<li>open <a href="http://localhost:9100/" target="_blank" rel="external">http://localhost:9100/</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[大数据分析平台 apahce kylin 实践-1.初识apache kylin]]></title>
+      <url>https://scai2013.github.io/2017/01/16/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B9%B3%E5%8F%B0-apahce-kylin-%E5%AE%9E%E8%B7%B5-1-%E5%88%9D%E8%AF%86apache-kylin/</url>
+      <content type="html"><![CDATA[<pre><code>一. apache kylin 简介
+二. Apache kylin 的工作机制
+三. 小结-kylin的优劣
+四. 实践场景思考-水资源取水户统计分析场景
+五. 场景演示
+</code></pre><h2 id="Apache_kylin_u662F_u4EC0_u4E48"><a href="#Apache_kylin_u662F_u4EC0_u4E48" class="headerlink" title="Apache kylin是什么"></a>Apache kylin是什么</h2><p><a href="http://kylin.apache.org/" target="_blank" rel="external">Apache kylin</a> 是一个开源的分布式分析引擎。它通过ANSI-SQL接口，提供基于hadoop的超大数据集（TB-PB级）的多维分析（<a href="http://blog.csdn.net/zhangzheng0413/article/details/8271322/" target="_blank" rel="external">OLAP</a>）功能。</p>
+<p>只需三步，kylin即可实现超大数据集上的亚秒级（sub-second latency）查询。</p>
+<blockquote>
+<ol>
+<li>确定hadoop上一个<a href="http://blog.csdn.net/huojiao2006/article/details/51209982" target="_blank" rel="external">星型模式</a>（wiki:Star schema）的数据集。</li>
+<li>构建<a href="http://www2.cs.uregina.ca/~dbd/cs831/notes/dcubes/dcubes.html" target="_blank" rel="external">数据立方体</a>（wiki:Data cube）。</li>
+<li>可通过ODBC, JDBC,RESTful API等接口在亚秒级的延迟内查询相关数据。</li>
+</ol>
+</blockquote>
+<p><img src="/images/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/kylin_diagram.png" alt="" title="com_update"> </p>
+<h2 id="Apache_kylin__u7684_u5DE5_u4F5C_u673A_u5236"><a href="#Apache_kylin__u7684_u5DE5_u4F5C_u673A_u5236" class="headerlink" title="Apache kylin 的工作机制"></a>Apache kylin 的工作机制</h2><h3 id="kylin__u5DE5_u4F5C_u6982_u5FF5"><a href="#kylin__u5DE5_u4F5C_u6982_u5FF5" class="headerlink" title="kylin 工作概念"></a>kylin 工作概念</h3><p><strong>Apache kylin</strong> 能提供低延迟（sub-second latency）的秘诀就是预计算，即针对一个星型拓扑结构的数据立方体，预计算多个维度组合的度量，然后将结果保存在hbase中，对外暴露JDBC、ODBC、Rest API的查询接口，即可实现实时查询。<br>数据立方体一般由Hive中的一个<strong>事实表</strong>,多个<strong>查找表</strong>组成。预计算的过程在kylin中就是Cube 的build过程.</p>
+<h3 id="kylin__u6838_u5FC3_u6982_u5FF5"><a href="#kylin__u6838_u5FC3_u6982_u5FF5" class="headerlink" title="kylin 核心概念"></a>kylin 核心概念</h3><p><strong>表（Table）</strong>：表定义在hive中，是数据立方体(Data cube)的数据源，在build cube 之前，必须同步在kylin中。</p>
+<p><strong>模型(model)</strong>:模型描述了一个星型模式的数据结构，它定义了一个<a href="https://en.wikipedia.org/wiki/Fact_table" title="wiki:Fact table" target="_blank" rel="external">事实表（Fact Table）</a>和多个<a href="https://en.wikipedia.org/wiki/Lookup_table" title="wiki:lookuup Table" target="_blank" rel="external">查找表（Lookup Table）</a>的连接和过滤关系。  </p>
+<p><strong>立方体(Cube)</strong>：它定义了使用的模型、模型中的表的<a href="https://en.wikipedia.org/wiki/Dimension" title="Wiki:dimension" target="_blank" rel="external">维度（dimension）</a>、<a href="https://en.wikipedia.org/wiki/Measure" title="Wiki:measure" target="_blank" rel="external">度量（measure)</a> ,一般指聚合函数，如：sum、count、average等）、如何对段分区(segments partition)、合并段(segments auto-merge)等的规则。   </p>
+<p><strong>立方体段(Cube Segment)</strong>：它是立方体构建(build)后的数据载体，一个 segment 映射hbase中的一张表，立方体实例构建(build)后，会产生一个新的segment，一旦某个已经构建的立方体的原始数据发生变化，只需刷新（fresh）变化的时间段所关联的segment即可。  </p>
+<p><strong>作业(Job)</strong>：对立方体实例发出构建（build）请求后，会产生一个作业。该作业记录了立方体实例build时的每一步任务信息。作业的状态信息反映构建立方体实例的结果信息。</p>
+<ul>
+<li><strong>NEW</strong> - This denotes one job has been just created.</li>
+<li><strong>PENDING</strong> - This denotes one job is paused by job scheduler and waiting for   resources.</li>
+<li><strong>RUNNING</strong> - This denotes one job is running in progress.</li>
+<li><strong>FINISHED</strong> - This denotes one job is successfully finished.</li>
+<li><strong>ERROR</strong> - This denotes one job is aborted with errors.</li>
+<li><strong>DISCARDED</strong> - This denotes one job is cancelled by end users.<h2 id="kylin__u5DE5_u4F5C_u673A_u5236"><a href="#kylin__u5DE5_u4F5C_u673A_u5236" class="headerlink" title="kylin 工作机制"></a>kylin 工作机制</h2><a href="http://blog.csdn.net/ebay/article/details/48494675" target="_blank" rel="external">Apache Kylin的快速数据立方体算法</a></li>
+</ul>
+<h2 id="u5C0F_u7ED3-kylin_u7684_u4F18_u52A3"><a href="#u5C0F_u7ED3-kylin_u7684_u4F18_u52A3" class="headerlink" title="小结-kylin的优劣"></a>小结-kylin的优劣</h2><h3 id="u4E3B_u6D41_u5927_u6570_u636E_u5206_u6790_u5DE5_u5177_u6BD4_u8F83"><a href="#u4E3B_u6D41_u5927_u6570_u636E_u5206_u6790_u5DE5_u5177_u6BD4_u8F83" class="headerlink" title="主流大数据分析工具比较"></a>主流大数据分析工具比较</h3><h4 id="u5B98_u65B9_u7406_u7531"><a href="#u5B98_u65B9_u7406_u7531" class="headerlink" title="官方理由"></a>官方理由</h4><p><img src="/images/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/compare.png" alt="" title="官方对比例子"> </p>
+<h4 id="u77E5_u4E4E_u8BC4_u8BBA"><a href="#u77E5_u4E4E_u8BC4_u8BBA" class="headerlink" title="知乎评论"></a>知乎评论</h4><ul>
+<li><strong>presto</strong>：facebook开源的一个java写的分布式数据查询框架，原生集成了Hive、Hbase和关系型数据库，Presto背后所使用的执行模式与Hive有根本的不同，它没有使用MapReduce，大部分场景下比hive快一个数量级，其中的关键是所有的处理都在内存中完成。</li>
+<li><strong>Druid</strong>：是一个实时处理时序数据的Olap数据库，因为它的索引首先按照时间分片，查询的时候也是按照时间线去路由索引。</li>
+<li><strong>spark SQL</strong>：基于spark平台上的一个olap框架，本质上也是基于<a href="http://stackoverflow.com/questions/25836316/how-dag-works-under-the-covers-in-rdd" target="_blank" rel="external">DAG(Directed acyclic graph)</a>的<a href="http://www.cnblogs.com/yubo/archive/2010/04/23/1718810.html" target="_blank" rel="external">MPP(Massive Parallel Processing)</a>， 基本思路是增加机器来并行计算，从而提高查询速度。</li>
+<li><strong>kylin</strong>：核心是Cube，cube是一种预计算技术，基本思路是预先对数据作多维索引，查询时只扫描索引而不访问原始数据从而提速</li>
+</ul>
+<p>这几种框架各有优缺点，存在就是合理，如何选型个人看法如下：<br>从成熟度来讲：kylin&gt;spark sql&gt;Druid&gt;presto<br>从超大数据的查询效率来看：Druid&gt;kylin&gt;presto&gt;spark sql<br>从支持的数据源种类来讲：presto&gt;spark sql&gt;kylin&gt;Druid  </p>
+<h3 id="kylin_u9009_u53D6_u573A_u666F_u8003_u8651_uFF1A"><a href="#kylin_u9009_u53D6_u573A_u666F_u8003_u8651_uFF1A" class="headerlink" title="kylin选取场景考虑："></a>kylin选取场景考虑：</h3><ol>
+<li>大数据量情况下满足秒级多维分析</li>
+<li>需要支持水平扩展</li>
+<li>在大数据量基础上使用标准SQL查询小数据量结果集能够达到毫秒级</li>
+<li>需要支持与传统BI工具无缝集成，如Tableau, PowerBI，Excel</li>
+<li>是否基于Hadoop生态系统</li>
+</ol>
+<h2 id="u5B9E_u8DF5_u573A_u666F_u601D_u8003-_u6C34_u8D44_u6E90_u53D6_u6C34_u6237_u7EDF_u8BA1_u5206_u6790_u573A_u666F"><a href="#u5B9E_u8DF5_u573A_u666F_u601D_u8003-_u6C34_u8D44_u6E90_u53D6_u6C34_u6237_u7EDF_u8BA1_u5206_u6790_u573A_u666F" class="headerlink" title="实践场景思考-水资源取水户统计分析场景"></a>实践场景思考-水资源取水户统计分析场景</h2><p><img src="/images/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/waterPro.png" alt="" title="水资源取水户关系模型"> </p>
+<h3 id="u9700_u6C42_uFF1A__u5F53_u524D_u65E5_u671F_u6C47_u96C6_u524D_u4E00_u5929_uFF0C"><a href="#u9700_u6C42_uFF1A__u5F53_u524D_u65E5_u671F_u6C47_u96C6_u524D_u4E00_u5929_uFF0C" class="headerlink" title="需求： 当前日期汇集前一天，"></a>需求： 当前日期汇集前一天，</h3><p>各取水户的月累计、年累计取水量<br>各县、市、省的月累计取水量、年累计取水量<br>各水资源三级、二级、一级 分区月累计取水量、年累计取水量<br>全国月累计取水量、年累计取水量</p>
+<h3 id="u5206_u89E3"><a href="#u5206_u89E3" class="headerlink" title="分解"></a>分解</h3><h4 id="u4E8B_u5B9E_u8868"><a href="#u4E8B_u5B9E_u8868" class="headerlink" title="事实表"></a>事实表</h4><p>定义宽表:  </p>
+<ul>
+<li><strong>省|市|县|取水户|取水点|时间|日水量</strong>   </li>
+<li><strong>水资源一级分区|水资源二级分区|水资源三级分区|取水户|取水点|时间|日水量</strong></li>
+</ul>
+<h4 id="u7EF4_u5EA6_u8868"><a href="#u7EF4_u5EA6_u8868" class="headerlink" title="维度表"></a>维度表</h4><ul>
+<li>时间维度： 年、月、日，其中天为最小粒度，也为该表主键</li>
+<li>取水点维表</li>
+<li>取水户维表</li>
+<li>县维表</li>
+<li>市维表</li>
+<li>省维表</li>
+<li>水资源三级分区</li>
+<li>水资源二级分区</li>
+<li>水资源一级分区</li>
+</ul>
+<h4 id="u521B_u5EFAcube_u53C2_u8003"><a href="#u521B_u5EFAcube_u53C2_u8003" class="headerlink" title="创建cube参考"></a>创建cube参考</h4><p><a href="http://kylin.apache.org/cn/docs15/tutorial/create_cube.html" target="_blank" rel="external">Kylin Cube 创建教程</a></p>
+<p><code>下个章节将对上述场景，着手安装kylin 、 创建相应的cube并进行</code></p>
+<p>参考文档：<br><a href="http://www.cnblogs.com/hark0623/p/5546082.html" target="_blank" rel="external">[1] Kylin的cube模型</a><br><a href="http://blog.csdn.net/ebay/article/details/48494675" target="_blank" rel="external">[2] Apache Kylin的快速数据立方体算法——概述</a><br><a href="http://www2.cs.uregina.ca/~dbd/cs831/notes/dcubes/dcubes.html" target="_blank" rel="external">[3] Data Cubes</a><br><a href="https://zhuanlan.zhihu.com/p/22140856" target="_blank" rel="external">[4] Apache kylin内部解剖</a><br><a href="https://zhuanlan.zhihu.com/p/22082046" target="_blank" rel="external">[5] Apache kylin 介绍篇</a><br><a href="http://blog.csdn.net/zhangzheng0413/article/details/8271322/" target="_blank" rel="external">[6] OLAP、OLTP的介绍和比较</a><br><a href="http://www.csdn.net/article/2015-11-27/2826343?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">[7] 京东王晓雨：Apache Kylin在云海的实践</a><br><a href="http://www.itnpc.com/news/web/146889317892719.html" target="_blank" rel="external">[8] apache-kylin完整安装流程</a>  </p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>https://scai2013.github.io/2016/11/03/python%E7%AC%94%E8%AE%B001/</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[mysql数据库-调优优化思路01]]></title>
+      <url>https://scai2013.github.io/2016/10/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96-mysql%E8%B0%83%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF01/</url>
+      <content type="html"><![CDATA[<pre><code>一. 宏观性能的衡量标准
+二. 业务数据库性能诊断策略
+三. 微观性能诊断解析
+</code></pre><p>参考文档：<br>    <a href="http://www.2cto.com/database/201501/372275.html" target="_blank" rel="external">MySQL几点重要的性能指标计算和优化</a></p>
+<h3 id="u4E00-__u5B8F_u89C2_u6027_u80FD_u7684_u8861_u91CF_u6807_u51C6_28_u4EE5_u4E0B_u53EA_u9488_u5BF9innodb_u5F15_u64CE_29"><a href="#u4E00-__u5B8F_u89C2_u6027_u80FD_u7684_u8861_u91CF_u6807_u51C6_28_u4EE5_u4E0B_u53EA_u9488_u5BF9innodb_u5F15_u64CE_29" class="headerlink" title="一. 宏观性能的衡量标准(以下只针对innodb引擎)"></a>一. 宏观性能的衡量标准(以下只针对innodb引擎)</h3><p>mysql 在业务系统运行过程中，可以通过各种手段对自身的数据库进行评估确定数据库的性能。针对性能的评估标准可以通过以下主要的指标来进行衡量</p>
+<h4 id="1-_QPS__28_u6BCF_u79D2_u67E5_u8BE2_u6570_29"><a href="#1-_QPS__28_u6BCF_u79D2_u67E5_u8BE2_u6570_29" class="headerlink" title="1. QPS (每秒查询数)"></a>1. QPS (每秒查询数)</h4><p>对于innodb引擎，可以使用该公式计算出数据库的QPS:  </p>
+<p><code>QPS = (com_update + com_insert + com_delete + com_select)/uptime</code></p>
+<p><code>com_update</code>,<code>com_insert</code>,<code>com_delete</code>,<code>com_select</code> 分别为增删改查消耗的时间，可以通过查询数据库的<code>status</code>进行获得</p>
+<p><strong>com_update</strong></p>
+<p><img src="/images/com_update.png" alt="" title="com_update">  </p>
+<p><strong>com_insert</strong>  </p>
+<p><img src="/images/com_insert.png" alt="" title="com_insert"> </p>
+<p><strong>com_delete</strong>  </p>
+<p><img src="/images/com_delete.png" alt="" title="com_delete"> </p>
+<p><strong>com_select</strong>  </p>
+<p><img src="/images/com_select.png" alt="" title="com_select"> </p>
+<p><strong>uptime</strong>  </p>
+<p><img src="/images/uptime.png" alt="" title="uptime"> </p>
+<p>QPS = （147876+790213+376+3582553）/7166937 = 0.6308159259666996</p>
+<h4 id="2-_TPS__28_u6BCF_u79D2_u4E8B_u52A1_u6570__u6216_u8005__u541E_u5410_u91CF_29"><a href="#2-_TPS__28_u6BCF_u79D2_u4E8B_u52A1_u6570__u6216_u8005__u541E_u5410_u91CF_29" class="headerlink" title="2. TPS (每秒事务数 或者 吞吐量)"></a>2. TPS (每秒事务数 或者 吞吐量)</h4><p><code>TPS=(com_commit+com_rollback)/uptime</code>  </p>
+<p><img src="/images/TPS.png" alt="" title="TPS"> </p>
+<p>TPS = (763010 + 19665)/7167702 = 0.1091946902926489  </p>
+<h3 id="u4E8C-__u4E1A_u52A1_u6570_u636E_u5E93_u6027_u80FD_u8BCA_u65AD_u7B56_u7565"><a href="#u4E8C-__u4E1A_u52A1_u6570_u636E_u5E93_u6027_u80FD_u8BCA_u65AD_u7B56_u7565" class="headerlink" title="二. 业务数据库性能诊断策略"></a>二. 业务数据库性能诊断策略</h3><p><img src="/images/mysql-strategy.png" alt="" title="TPS"> </p>
+<h3 id="u4E09-__u5FAE_u89C2_u6027_u80FD_u7684_u8BCA_u65AD_u89E3_u6790_28_u4EE5_u4E0B_u53EA_u9488_u5BF9innodb_u5F15_u64CE_29"><a href="#u4E09-__u5FAE_u89C2_u6027_u80FD_u7684_u8BCA_u65AD_u89E3_u6790_28_u4EE5_u4E0B_u53EA_u9488_u5BF9innodb_u5F15_u64CE_29" class="headerlink" title="三. 微观性能的诊断解析(以下只针对innodb引擎)"></a>三. 微观性能的诊断解析(以下只针对innodb引擎)</h3><h4 id="1-__u7EBF_u7A0B_u8FDE_u63A5_u6570_u548C_u547D_u4E2D_u7387_uFF08_u5E76_u53D1_u6027_uFF09"><a href="#1-__u7EBF_u7A0B_u8FDE_u63A5_u6570_u548C_u547D_u4E2D_u7387_uFF08_u5E76_u53D1_u6027_uFF09" class="headerlink" title="1. 线程连接数和命中率（并发性）"></a>1. 线程连接数和命中率（并发性）</h4><p><img src="/images/concurrent.png" alt="" title="线程连接数和命中率">   </p>
+<ul>
+<li>Threads_cached: 代表当前此时此刻线程缓存中有多少空闲线程  </li>
+<li>Threads_connected:代表当前已建立连接的数量，因为一个连接就需要一个线程，所以也可以看成当前被使用的线程数  </li>
+<li>Threads_created: 代表从最近一次服务启动，已创建线程的数量  </li>
+<li>Threads_running: 代表当前激活的（非睡眠状态）线程数  </li>
+<li>thread_cache_size: 线程缓存个数  </li>
+</ul>
+<p><code>线程缓存命中率=1-Threads_created/Connections</code></p>
+<p>根据Threads_connected可预估thread_cache_size值应该设置多大. 如果内存足够大，也可以设置成thread_cache_size值和threaads_connected值相同；</p>
+<p>或者通过观察threads_created值，如果该值很大或一直在增长，可以适当增加thread_cache_size的值；在休眠状态下每个线程占用大概256KB左右的内存，所以当内存足够时，设置太小也不会节约太多内存，除非该值已经超过几千。  </p>
+<p><strong>thread_cache_size缓存个数设置</strong></p>
+<p>mysql&gt; show variables like ‘%thread_cache_size%’;<br>+——————-+——-+<br>| Variable_name     | Value |<br>+——————-+——-+<br>| thread_cache_size | 9     |<br>+——————-+——-+  </p>
+<p>mysql&gt; set global thread_cache_size=16</p>
+<p>永久修改<br>vi /etc/my.cnf 配置文件，[mysqld] 下增加<br>thread_cache_size = 64 </p>
+<h4 id="2-__u6700_u5927_u8FDE_u63A5_u6570"><a href="#2-__u6700_u5927_u8FDE_u63A5_u6570" class="headerlink" title="2. 最大连接数"></a>2. 最大连接数</h4><p><img src="/images/connections.png" alt="" title="TPS"> </p>
+<p>通常max_connections的大小应该设置为比Max_used_connections状态值大，Max_used_connections状态值反映服务器连接在某个时间段是否有尖峰，如果该值大于max_connections值，代表客户端至少被拒绝了一次，可以简单地设置为符合以下条件：Max_used_connections/max_connections=0.8</p>
+<h4 id="3-__u7F13_u5B58_u547D_u4E2D_u7387"><a href="#3-__u7F13_u5B58_u547D_u4E2D_u7387" class="headerlink" title="3. 缓存命中率"></a>3. 缓存命中率</h4><p>mysql&gt; show global status like ‘innodb_buffer_pool_read%’;<br>+—————————————+———–+<br>| Variable_name                         | Value     |<br>+—————————————+———–+<br>| Innodb_buffer_pool_read_ahead_rnd     | 0         |<br>| Innodb_buffer_pool_read_ahead         | 0         |//预读的页数<br>| Innodb_buffer_pool_read_ahead_evicted | 0         |<br>| Innodb_buffer_pool_read_requests      | 144572627 |//从缓冲池中读取的次数<br>| Innodb_buffer_pool_reads              | 289       |//表示从物理磁盘读取的页数<br>+—————————————+———–+<br>5 rows in set (0.00 sec)</p>
+<p><code>缓冲池命中率 = (Innodb_buffer_pool_read_requests)/(Innodb_buffer_pool_read_requests + Innodb_buffer_pool_read_ahead + Innodb_buffer_pool_reads)=99.994%</code></p>
+<p>如果该值小于99.9%，建议就应该增大innodb_buffer_pool_size的值了，该值一般设置为内存总大小的75%-85%，或者计算出操作系统所需缓存+mysql每个连接所需的内存（例如排序缓冲和临时表）+MyISAM键缓存，剩下的内存都给innodb_buffer_pool_size，不过也不宜设置太大，会造成内存的频繁交换，预热和关闭时间长等问题。</p>
+<h4 id="4-_join_u64CD_u4F5C_u4FE1_u606F"><a href="#4-_join_u64CD_u4F5C_u4FE1_u606F" class="headerlink" title="4. join操作信息"></a>4. join操作信息</h4><p><img src="/images/joins.png" alt="" title="joins">  </p>
+<p><strong>状态变量解析</strong><br>| Select_full_join | 应用到其他表，没有使用索引的联接的数量，值很大说明join语句写得很有问题<br>| Select_full_range_join | 应用到其他表，在引用的表中使用范围搜索的联接的数量 select <em> from A,B where A.columnx=1 and B.columnx between 1 and 100<br>| Select_range | 仅应用到第一个表，在第一个表中使用范围的联接的数量，该值很大说明join写得没有问题，通常可查看select_full_join和select_range的比值来判断系统中join语句的性能情况<br>| Select_range_check | 应用到其他表，每一次range索引扫描范围是不确定的 select </em> from A,B where B.columnx&gt;A.columnx<br>| Select_scan | 仅应用到第一个表，对第一个表进行完全扫描的联接的数量<br>| Sort_merge_passes | 使用临时文件重排序的数量<br>| Sort_range | 在范围内执行的排序的数量<br>| Sort_rows | 已经排序的行数<br>| Sort_scan | 通过扫描表完成的排序的数量</p>
+<p>快慢：（快）Select_full_range_join &lt; Select_range_check &lt; Select_full_join（慢）  </p>
+<h4 id="5-__u6162_u67E5_u8BE2"><a href="#5-__u6162_u67E5_u8BE2" class="headerlink" title="5. 慢查询"></a>5. 慢查询</h4><p><img src="/images/slowquery.png" alt="" title="slowquery">   </p>
+<p>该值表示mysql启动以来的慢查询个数，即执行时间超过<code>long_query_time</code>的次数，可根据Slow_queries/uptime 的比值判断单位时间内的慢查询个数，进而判断系统的性能。</p>
+<h5 id="5-1__u6162_u67E5_u8BE2_u4ECB_u7ECD"><a href="#5-1__u6162_u67E5_u8BE2_u4ECB_u7ECD" class="headerlink" title="5.1 慢查询介绍"></a>5.1 慢查询介绍</h5><p><strong>修改慢查询的时间（1为1秒）</strong></p>
+<p><code>mysql&gt; set global long_query_time=1;</code>  //全局<br><code>mysql&gt; set session long_query_time=1;</code> //session级别 </p>
+<p><strong>显示慢查询的时间值的命令</strong> </p>
+<p><code>mysql&gt; show variables like &#39;long_query_time&#39;;</code></p>
+<p><strong>统计慢查询次数</strong>（一条sql语句执行所需时间超过慢查询设置的时间，就统计一次）  </p>
+<p><code>mysql&gt; show status like &#39;slow_queries&#39;;</code>  </p>
+<p><strong>统计未使用索引</strong>（一条sql语句执行未使用到相关索引，就统计一次）  </p>
+<p><code>mysql&gt; set global log_queries_not_using_indexes=1;</code></p>
+<h5 id="5-2__u5B9A_u4F4D_u6162_u67E5_u8BE2_u7684sql_u8BED_u53E5"><a href="#5-2__u5B9A_u4F4D_u6162_u67E5_u8BE2_u7684sql_u8BED_u53E5" class="headerlink" title="5.2  定位慢查询的sql语句"></a>5.2  定位慢查询的sql语句</h5><ol>
+<li><p>查询是否开启了慢查询日志<br> <code>mysql&gt; show variables like &#39;%slow%&#39;;</code><br>如果slow_query_log 为 off，则  </p>
+<p> <code>mysql&gt; set global slow_query_log=1;</code> </p>
+</li>
+<li><p>查询是否开启未使用索引日志</p>
+<p> <code>show variables like &#39;%log_queries_not_using_indexes&#39;;</code>  </p>
+</li>
+</ol>
+<p>log_queries_not_using_indexes 为 off，则  </p>
+<p><code>mysql&gt; set global log_queries_not_using_indexes=1;</code></p>
+<ol>
+<li><p>在mysql的/etc/my.cnf(linux), my.ini(window)中，查找datadir  </p>
+<p> <code>datadir=xxxxxxxx</code><br>在datadir这个目录下，会生成一个log日志，里面即可定位慢查询的sql语句！  </p>
+</li>
+<li><p>格式化慢查询日志   </p>
+<p> <code>mysqldumpslow -s at,al /var/lib/mysql/xxxxx-slow.log</code>   </p>
+</li>
+</ol>
+<p><strong>下一章节将介绍系统测试数据性能的方法，如脚本awk获取status状态，mysqlslap、<br>sysbench、tpcc 等测试工具针对的运用。</strong></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[mysql技术内幕笔记 02]]></title>
       <url>https://scai2013.github.io/2016/09/27/mysql%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95%E7%AC%94%E8%AE%B0-02/</url>
       <content type="html"><![CDATA[<h3 id="mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0"><a href="#mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0" class="headerlink" title="mysql技术内幕sql编程笔记"></a>mysql技术内幕sql编程笔记</h3><h4 id="02__u7B2C_u4E09_u7AE0"><a href="#02__u7B2C_u4E09_u7AE0" class="headerlink" title="02 第三章"></a>02 第三章</h4><h4 id="1-__u903B_u8F91_u67E5_u8BE2_u5904_u7406_u7684_u5404_u4E2A_u9636_u6BB5"><a href="#1-__u903B_u8F91_u67E5_u8BE2_u5904_u7406_u7684_u5404_u4E2A_u9636_u6BB5" class="headerlink" title="1. 逻辑查询处理的各个阶段"></a>1. 逻辑查询处理的各个阶段</h4><p>图显示了逻辑查询的顺序，最先执行的是<code>From</code> 操作，最后执行的是<code>limit</code>操作。每个操作都会产生一张虚拟表的输出，该虚拟表作为下一个处理的输入，但只有最后一步生成的虚拟表才会返回给用户，在图中的步骤中若没有在查询中指定某一个子句，则将跳过相应的步骤。<br><img src="/images/03-1.png" alt="" title="逻辑查询步骤">  </p>
