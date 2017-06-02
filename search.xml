@@ -4,6 +4,46 @@
   
     
     <entry>
+      <title><![CDATA[centos 6安装VirtualBox自动增强功能功：unable to find the sources of your current Linux kernel]]></title>
+      <url>https://scai2013.github.io/2017/06/02/VirtualBox%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%BC%BA%E5%8A%9F%E8%83%BD/</url>
+      <content type="html"><![CDATA[<h3 id="virtualbox_u589E_u5F3A_u5DE5_u5177_u5B89_u88C5_u65F6_u51FA_u73B0unable_to_find_the_sources_of_your_current_Linux_kernel"><a href="#virtualbox_u589E_u5F3A_u5DE5_u5177_u5B89_u88C5_u65F6_u51FA_u73B0unable_to_find_the_sources_of_your_current_Linux_kernel" class="headerlink" title="virtualbox增强工具安装时出现unable to find the sources of your current Linux kernel"></a>virtualbox增强工具安装时出现unable to find the sources of your current Linux kernel</h3><p>当在虚拟机(virtualBox)里无论是视觉效果还是物理机与虚拟机共享文件都是需要安装增强,当使用安装Linux centos 6.5 系统安装增强功能时出现如下状态：  </p>
+<pre>
+<code>
+/tmp/vbox.0/Makefile.include.header:97: *** Error: unable to find the sources of   
+your current Linux kernel. Specify KERN_DIR=<directory> and run Make 
+again。 停止。
+</directory></code>
+</pre>
+
+<p>从上面的结果我们可以很清楚的看出来出现了一处错误，根据提示查看/var/log/vboxadd-install.log文件会有下面的错误：[root@localhost VBOXADDITIONS_4.1.12_77245]# more  /var/log/vboxadd-install.log</p>
+<pre>
+<code>
+/var/log/vboxadd-install.log/tmp/vbox.0/Makefile.include.header:97: *** Error: unable to find the sources of 
+your current Linux kernel. Specify KERN_DIR=<directory> and run Make 
+again。 停止。Creating user for the Guest Additions.Creating udev rule for 
+the Guest Additions kernel module.
+</directory></code>
+</pre>
+
+<p>通过上面的提示我们可以知道错误的原因是没有内核原文件解决方法如下：（下面的操作都是在虚拟电脑里进行的不要理解成在物理机里）</p>
+<h4 id="u5148_u5B89_u88C5_u4E0B_u9762_u7684_u7A0B_u5E8F"><a href="#u5148_u5B89_u88C5_u4E0B_u9762_u7684_u7A0B_u5E8F" class="headerlink" title="先安装下面的程序"></a>先安装下面的程序</h4><blockquote>
+<p>gcc kernel kernel-devel  </p>
+</blockquote>
+<p>程序说明 gcc.i686：各类编译器(C、C++、Objective-C、Java、…) kernel.i686 : Linux 内核（Linux 操作系统的核心）kernel-devel.i686：用来构建与内核匹配的内核模块的开发软件包。程序安装<br>打开网络连接，因为执行以下命令以后需要联网下载所需程序.</p>
+<blockquote>
+<p>yum install gcc             从软件仓库下载gcc,然后安装，这个是编译器<br>yum install make            安装make，这个是自动编译源码的工具，写好makefile就可以方便编译<br>yum install kernel-headers  安装内核，编译内核，驱动必要的<br>yum install kernel-devel    同上  </p>
+</blockquote>
+<h4 id="u91CD_u65B0_u542F_u52A8_u7535_u8111"><a href="#u91CD_u65B0_u542F_u52A8_u7535_u8111" class="headerlink" title="重新启动电脑"></a>重新启动电脑</h4><p>启动时系统会自动从新的内核文件选项启动, 不要改回到原来的选项默认就好（回到原来的选项还会出现上面的错误）。重新安装增强程序问题就可以解决.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[hadoop 安装]]></title>
+      <url>https://scai2013.github.io/2017/06/02/hadoop-%E5%AE%89%E8%A3%85/</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[elasticsearch 笔记]]></title>
       <url>https://scai2013.github.io/2017/06/01/elasticsearch-%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<blockquote>

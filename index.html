@@ -261,6 +261,234 @@
             
               
                 
+                <a class="post-title-link" href="/2017/06/02/VirtualBox自动增强功能/" itemprop="url">
+                  centos 6安装VirtualBox自动增强功能功：unable to find the sources of your current Linux kernel
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-02T16:31:10+08:00" content="2017-06-02">
+              2017-06-02
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/02/VirtualBox自动增强功能/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/02/VirtualBox自动增强功能/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="virtualbox_u589E_u5F3A_u5DE5_u5177_u5B89_u88C5_u65F6_u51FA_u73B0unable_to_find_the_sources_of_your_current_Linux_kernel"><a href="#virtualbox_u589E_u5F3A_u5DE5_u5177_u5B89_u88C5_u65F6_u51FA_u73B0unable_to_find_the_sources_of_your_current_Linux_kernel" class="headerlink" title="virtualbox增强工具安装时出现unable to find the sources of your current Linux kernel"></a>virtualbox增强工具安装时出现unable to find the sources of your current Linux kernel</h3><p>当在虚拟机(virtualBox)里无论是视觉效果还是物理机与虚拟机共享文件都是需要安装增强,当使用安装Linux centos 6.5 系统安装增强功能时出现如下状态：  </p>
+<pre>
+<code>
+/tmp/vbox.0/Makefile.include.header:97: *** Error: unable to find the sources of   
+your current Linux kernel. Specify KERN_DIR=<directory> and run Make 
+again。 停止。
+</directory></code>
+</pre>
+
+<p>从上面的结果我们可以很清楚的看出来出现了一处错误，根据提示查看/var/log/vboxadd-install.log文件会有下面的错误：[root@localhost VBOXADDITIONS_4.1.12_77245]# more  /var/log/vboxadd-install.log</p>
+<pre>
+<code>
+/var/log/vboxadd-install.log/tmp/vbox.0/Makefile.include.header:97: *** Error: unable to find the sources of 
+your current Linux kernel. Specify KERN_DIR=<directory> and run Make 
+again。 停止。Creating user for the Guest Additions.Creating udev rule for 
+the Guest Additions kernel module.
+</directory></code>
+</pre>
+
+<p>通过上面的提示我们可以知道错误的原因是没有内核原文件解决方法如下：（下面的操作都是在虚拟电脑里进行的不要理解成在物理机里）</p>
+<h4 id="u5148_u5B89_u88C5_u4E0B_u9762_u7684_u7A0B_u5E8F"><a href="#u5148_u5B89_u88C5_u4E0B_u9762_u7684_u7A0B_u5E8F" class="headerlink" title="先安装下面的程序"></a>先安装下面的程序</h4><blockquote>
+<p>gcc kernel kernel-devel  </p>
+</blockquote>
+<p>程序说明 gcc.i686：各类编译器(C、C++、Objective-C、Java、…) kernel.i686 : Linux 内核（Linux 操作系统的核心）kernel-devel.i686：用来构建与内核匹配的内核模块的开发软件包。程序安装<br>打开网络连接，因为执行以下命令以后需要联网下载所需程序.</p>
+<blockquote>
+<p>yum install gcc             从软件仓库下载gcc,然后安装，这个是编译器<br>yum install make            安装make，这个是自动编译源码的工具，写好makefile就可以方便编译<br>yum install kernel-headers  安装内核，编译内核，驱动必要的<br>yum install kernel-devel    同上  </p>
+</blockquote>
+<h4 id="u91CD_u65B0_u542F_u52A8_u7535_u8111"><a href="#u91CD_u65B0_u542F_u52A8_u7535_u8111" class="headerlink" title="重新启动电脑"></a>重新启动电脑</h4><p>启动时系统会自动从新的内核文件选项启动, 不要改回到原来的选项默认就好（回到原来的选项还会出现上面的错误）。重新安装增强程序问题就可以解决.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/02/hadoop-安装/" itemprop="url">
+                  hadoop 安装
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-02T16:30:23+08:00" content="2017-06-02">
+              2017-06-02
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/02/hadoop-安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/02/hadoop-安装/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/06/01/elasticsearch-笔记/" itemprop="url">
                   elasticsearch 笔记
                 </a>
@@ -1302,7 +1530,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1312,7 +1540,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
