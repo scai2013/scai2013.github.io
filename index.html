@@ -90,6 +90,7 @@
 <meta property="og:url" content="https://scai2013.github.io/index.html">
 <meta property="og:site_name" content="小蔡的日志">
 <meta property="og:description" content="写我所写，随心所欲">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小蔡的日志">
 <meta name="twitter:description" content="写我所写，随心所欲">
@@ -239,6 +240,987 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/14/Windows下设置VirtualBox中Linux共享文件夹/" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-14T09:59:53+08:00" content="2017-11-14">
+              2017-11-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/14/Windows下设置VirtualBox中Linux共享文件夹/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/14/Windows下设置VirtualBox中Linux共享文件夹/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: Windows下设置VirtualBox中Linux共享文件夹<br>date: 2017-11-14 09:59:53</p>
+<h2 id="tags_3A__5BVirtualBox_2C_u5BBF_u4E3B_u673A_2C_u5171_u4EAB_2Clinux_2Cwindows_5D"><a href="#tags_3A__5BVirtualBox_2C_u5BBF_u4E3B_u673A_2C_u5171_u4EAB_2Clinux_2Cwindows_5D" class="headerlink" title="tags: [VirtualBox,宿主机,共享,linux,windows]"></a>tags: [VirtualBox,宿主机,共享,linux,windows]</h2><p>###1. 安装增强功能包(Guest Additions)<br>安装好linux后正常登录，在VirtualBox的菜单里选择  </p>
+<blockquote>
+<p>“设备(Devices)” -&gt; “安装增强功能包(Install Guest Additions)”。  </p>
+</blockquote>
+<p>你会发现在Ubuntu桌面上多出一个光盘图标。<br><img src="/2017/11/14/Windows下设置VirtualBox中Linux共享文件夹/001.png" alt=""><br>这张光盘默认被自动加载到了文件夹/media/cdom0。若有界面操作可以直接运行光盘，或者进入命令行终端，输入：</p>
+<blockquote>
+<p>cd /media/cdom0<br>./VboxLinuxAdditions.run</p>
+</blockquote>
+<p>开始安装工具包。安装完毕后会提示要重启系统，重启：</p>
+<blockquote>
+<p>reboot</p>
+</blockquote>
+<p>###2. 设置共享文件夹</p>
+<p>重启完成后点击  </p>
+<blockquote>
+<p>“设备(Devices)” -&gt; 共享文件夹(Shared Folders)菜单  </p>
+</blockquote>
+<p>添加一个共享文件夹，选项固定和临时是指该文件夹是否是持久的。共享名可以任取一个自己喜欢的，比如”gongxiang”，尽量使用英文名称。<br><img src="/2017/11/14/Windows下设置VirtualBox中Linux共享文件夹/002.png" alt=""> </p>
+<p>###3. 挂载共享文件夹</p>
+<p>重新进入虚拟系统，在命令行终端下输入：</p>
+<blockquote>
+<p>mkdir /mnt/shared<br>mount -t vboxsf shared /mnt/shared</p>
+</blockquote>
+<p>其中”shared”是之前创建的共享文件夹的名字。OK，现在虚拟系统和主机可以互传文件了</p>
+<p>###4.设置自动挂载</p>
+<p>假如不想每一次都手动挂载，可以在/etc/fstab中添加一项</p>
+<blockquote>
+<p>shared /mnt/shared vboxsf rw,gid=100,uid=1000,auto 0 0</p>
+</blockquote>
+<p>这样就能够自动挂载了。</p>
+<p>###5. 卸载<br>卸载的话使用下面的命令</p>
+<blockquote>
+<p>umount -f /mnt/shared</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/06/Linux下Tomcat开机自动启动/" itemprop="url">
+                  Linux下Tomcat开机自动启动
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-06T09:48:23+08:00" content="2017-11-06">
+              2017-11-06
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/06/Linux下Tomcat开机自动启动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/06/Linux下Tomcat开机自动启动/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Linux下tomcat开机自动启动有两种方法，一种是简单，一种是复杂而又专业的，使用shell脚本要实现，我们一般推荐shell脚本启动方式。下面我们分别介绍这两种方法。<br>1.shell脚本启动<br>众所周知，在Linux中设置开机自启动的服务，需要在/etc/rcX.d下挂载。除此之外还需要在/etc/init.d下些启动脚本。其实很简单，先export出所需要的环境变量，例如JAVA_HOME，JRE_HOME, CATALINA_HOME, CATALINA_BASE什么的，然后再直接调用$CATALINA_HOME/bin/startup.sh就能成功启动。<br>第一步：我们在/etc/init.d下新建一个文件tomcat（需要在root权限下操作）   </p>
+<blockquote>
+<p>vi /etc/init.d/tomcat   </p>
+</blockquote>
+<p>写下如下代码，tomcat自启动脚本：  </p>
+<blockquote>
+<p>#!/bin/sh<br># chkconfig: 345 99 10<br># description: Auto-starts tomcat<br># /etc/init.d/tomcatd<br># Tomcat auto-start<br># Source function library.<br>#. /etc/init.d/functions<br># source networking configuration.<br>#. /etc/sysconfig/network<br>RETVAL=0<br>export JAVA_HOME=/usr/java/jdk1.7.0_60<br>export JRE_HOME=/usr/java/jdk1.7.0_60/jre<br>export CATALINA_HOME=/usr/local/tomcat<br>export CATALINA_BASE=/usr/local/tomcat<br>start()<br>{<br>        if [ -f $CATALINA_HOME/bin/startup.sh ];<br>          then<br>            echo $”Starting Tomcat”<br>                $CATALINA_HOME/bin/startup.sh<br>            RETVAL=$?<br>            echo “ OK”<br>            return $RETVAL<br>        fi<br>}<br>stop()<br>{<br>        if [ -f $CATALINA_HOME/bin/shutdown.sh ];<br>          then<br>            echo $”Stopping Tomcat”<br>                $CATALINA_HOME/bin/shutdown.sh<br>            RETVAL=$?<br>            sleep 1<br>            ps -fwwu root | grep tomcat|grep -v grep | grep -v PID | awk ‘{print $2}’|xargs kill -9<br>            echo “ OK”  </p>
+<pre><code>    # [ $RETVAL -eq 0 ] &amp;&amp; rm -f /var/lock/...  
+    return $RETVAL  
+fi  
+</code></pre><p>}<br>case “$1” in<br> start)<br>        start<br>        ;;<br> stop)<br>        stop<br>        ;;<br> restart)<br>         echo $”Restaring Tomcat”<br>         $0 stop<br>         sleep 1<br>         $0 start<br>         ;;<br> *)<br>        echo $”Usage: $0 {start|stop|restart}”<br>        exit 1<br>        ;;<br>esac<br>exit $RETVAL  </p>
+</blockquote>
+<p>这里特别提醒注意这一句ps -fwwu root | grep tomcat|grep -v grep | grep -v PID | awk ‘{print $2}’|xargs kill -9，熟悉Linux命令的人应该都清楚这句话的意义，这里就简单说下前半部分，查询root用户下tomcat的进程PID，个人根据实际情况修改。<br>第二步：保存退出之后，给其增加可执行权限  </p>
+<blockquote>
+<p>chmod +x /etc/init.d/tomcat</p>
+</blockquote>
+<p>第三步：挂载<br> 将这个shell文件的link连到/etc/rc2.d/目录下。linux的/etc/rcX.d/目录中的数字代表开机启动时不同的run level，也就是启动的顺序，Ubuntu9.10下有0-5六个level，不能随便连到其他目录下，可能在那个目录中的程序启动时Tomcat所需要的一些库尚未被加载，用ln命令将tomcat的链接链过去：sudo<br> ln -s /etc/init.d/tomcat /etc/rc2.d/S16Tomcat。rcX.d目录下的命名规则是很有讲究的，更具不同需要可能是S开头，也可能是K开头，之后的数字代表他们的启动顺序，详细看各自目录下的Readme文件。  </p>
+<blockquote>
+<p>ln -s /etc/init.d/tomcat /etc/rc2.d/S16Tomcat   </p>
+</blockquote>
+<p>第四步：设置脚本开机自启动<br>把这个脚本设置成系统启动时自动执行，系统关闭时自动停止，使用如下命令: </p>
+<blockquote>
+<p>chkconfig –add tomcat  </p>
+</blockquote>
+<p>第五步：验证<br>执行 sudo reboot。重启之后就会发现，Tomcat已经成功运行了。<br>题外话：添加这个脚本之后我们启动，停止，重启tomcat可以直接用命令  </p>
+<blockquote>
+<p>service tomcat start<br>service tomcat stop<br>service tomcat restart<br>另外一些tomcat设置命令有： chkconfig –list tomcat      chkconfig  tomcat on，大家可以试试看有什么效果。  </p>
+</blockquote>
+<p>2.修改系统文件<br>1.修改/etc/rc.d/rc.local   </p>
+<blockquote>
+<p>vi /etc/rc.d/rc.local<br>2.添加下面两行脚本，记住是两行，仅仅第二行不行，必须加第一行。在/etc/rc.d/rc.local文件最后加上<br>export JAVA_HOME=/usr/java/jdk1.7.0_60<br>/usr/local/tomcat/bin/startup.sh start    </p>
+</blockquote>
+<p>说明：/usr/java/jdk1.7.0_60 是jdk安装目录<br>/usr/local/tomcat是tomcat安装的目录  </p>
+<p>3.注意:修改rc.local文件为可执行</p>
+<blockquote>
+<p>chmod +x  rc.local    </p>
+</blockquote>
+<p>第一种shell脚本的方式实现tomcat的开机自启动已经实践过，第二种没用过，只是在网上搜到有这方面的资料，所以记录下来，方便以后学习。如果想了解更多请参考文档：<br><a href="http://www.cnblogs.com/gnorts/archive/2010/11/24/1886771.html" target="_blank" rel="external">http://www.cnblogs.com/gnorts/archive/2010/11/24/1886771.html</a><br><a href="http://jingyan.baidu.com/article/1612d50079cfe5e20f1eee71.html" target="_blank" rel="external">http://jingyan.baidu.com/article/1612d50079cfe5e20f1eee71.html</a><br><a href="http://blog.csdn.net/wangli61289/article/details/37924785" target="_blank" rel="external">http://blog.csdn.net/wangli61289/article/details/37924785</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/23/VritualBox-UUID-have-already-exists/" itemprop="url">
+                  VritualBox UUID have already exists
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-23T09:53:40+08:00" content="2017-06-23">
+              2017-06-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/23/VritualBox-UUID-have-already-exists/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/23/VritualBox-UUID-have-already-exists/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="VritualBox-UUID-have-already-exists"><a href="#VritualBox-UUID-have-already-exists" class="headerlink" title="VritualBox-UUID-have-already-exists"></a>VritualBox-UUID-have-already-exists</h2><p>有两种方法：</p>
+<h3 id="u66F4_u6539uuid_u53F7"><a href="#u66F4_u6539uuid_u53F7" class="headerlink" title="更改uuid号"></a>更改uuid号</h3><p>利用vbox自带的命令虚拟硬盘的uuid更改一下：命令如下:  </p>
+<blockquote>
+<p>VBoxManage.exe internalcommands sethduuid E:\centos.vdi</p>
+</blockquote>
+<p><strong>VBoxManage.exe internalcommands sethduuid +“你的虚拟硬盘”</strong>  </p>
+<h3 id="u7ED9_u5220_u9664_u76F8_u540C_u7684uuid"><a href="#u7ED9_u5220_u9664_u76F8_u540C_u7684uuid" class="headerlink" title="给删除相同的uuid"></a>给删除相同的uuid</h3><p>删除虚拟机时候没有选择“删除所有”，只是选择移除造成的相同的uuid </p>
+<p>管理 –&gt;虚拟介质管理器， 进入管理界面，删除相应的介质</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/20/大数据笔记-hadoop入门了解/" itemprop="url">
+                  大数据笔记-hadoop入门了解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-20T14:35:52+08:00" content="2017-06-20">
+              2017-06-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/20/大数据笔记-hadoop入门了解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/20/大数据笔记-hadoop入门了解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>前言 2011年接触hdoop做了安装、测试、便没有再持续跟进了，现在重新出发</p>
+</blockquote>
+<p>Hadoop 是 Apache 下的一个项目，由 HDFS、MapReduce、HBase、Hive 和 ZooKeeper<br>等成员组成。其中，HDFS 和 MapReduce 是两个最基础最重要的成员。<br>HDFS 是Google GFS 的开源版本，一个高度容错的分布式文件系统，它能够提供高吞<br>吐量的数据访问，适合存储海量（PB 级）的大文件（通常超过64M），<img src="/2017/06/20/大数据笔记-hadoop入门了解/20170620150039.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/16/redis安装/" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-16T18:36:15+08:00" content="2017-06-16">
+              2017-06-16
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/16/redis安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/16/redis安装/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>redis-benchmark</strong>  redis性能测试工具<br><strong>redis-check-aof</strong>  检查aof日志的工具<br><strong>redis-check-rdb</strong>  检查rbd日志的工具<br><strong>redis-clil</strong>       连接用的客户端<br>redis-sentinel -&gt; redis-server<br><strong>redis-server</strong>         服务端</p>
+<p>redis 后台运行方式<br>vi redis.conf<br>daemonize no —–&gt; yes</p>
+<p>####命令</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/16/python笔记01/" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-16T18:36:15+08:00" content="2017-06-16">
+              2017-06-16
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/16/python笔记01/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/16/python笔记01/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/16/hello-world/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-16T18:36:15+08:00" content="2017-06-16">
+              2017-06-16
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/16/hello-world/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/16/hello-world/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/15/linux下vi命令集/" itemprop="url">
+                  linux下vi命令集
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-15T13:31:00+08:00" content="2017-06-15">
+              2017-06-15
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/15/linux下vi命令集/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/15/linux下vi命令集/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="vi_u5E38_u7528_u547D_u4EE4"><a href="#vi_u5E38_u7528_u547D_u4EE4" class="headerlink" title="vi常用命令"></a>vi常用命令</h1><hr>
+<h2 id="u8FDB_u5165vi_u7684_u547D_u4EE4"><a href="#u8FDB_u5165vi_u7684_u547D_u4EE4" class="headerlink" title="进入vi的命令"></a>进入vi的命令</h2><p>vi filename :打开或新建文件，并将光标置于第一行首  </p>
+<blockquote>
+<p>vi /home/scai/myfile   </p>
+</blockquote>
+<p>vi +n filename ：打开文件，并将光标置于第n行首 </p>
+<blockquote>
+<p>vi +3 /home/scai/myfile</p>
+</blockquote>
+<p>vi + filename ：打开文件，并将光标置于最后一行首   </p>
+<blockquote>
+<p>vi + /home/scai/myfile  </p>
+</blockquote>
+<p>vi +/pattern filename：打开文件，并将光标置于第一个与pattern匹配的串处   </p>
+<blockquote>
+<p>vi +/^p /home/scai/myfile<br>// 光标定在以p开头位置处</p>
+</blockquote>
+<p>vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复filename<br>vi filename….filename ：打开多个文件，依次进行编辑 </p>
+<h2 id="u79FB_u52A8_u5149_u6807_u7C7B_u547D_u4EE4"><a href="#u79FB_u52A8_u5149_u6807_u7C7B_u547D_u4EE4" class="headerlink" title="移动光标类命令"></a>移动光标类命令</h2><blockquote>
+<p><strong>h</strong> ：光标左移一个字符<br><strong>l</strong> ：光标右移一个字符<br><strong>space</strong>：光标右移一个字符<br><strong>Backspace</strong>：光标左移一个字符<br><strong>k或Ctrl+p</strong>：光标上移一行<br><strong>j或Ctrl+n</strong> ：光标下移一行<br><strong>Enter</strong> ：光标下移一行<br><strong>w或W</strong> ：光标右移一个字至字首<br><strong>b或B</strong> ：光标左移一个字至字首<br><strong>e或E</strong> ：光标右移一个字至字尾<br><strong>)</strong> ：光标移至句尾<br><strong>(</strong> ：光标移至句首<br><strong>}</strong>：光标移至段落开头<br><strong>{</strong>：光标移至段落结尾<br><strong>nG</strong>：光标移至第n行首<br><strong>n+</strong>：光标下移n行<br><strong>n-</strong>：光标上移n行<br><strong>n$</strong>：光标移至第n行尾<br><strong>H</strong> ：光标移至屏幕顶行<br><strong>M</strong> ：光标移至屏幕中间行<br><strong>L</strong> ：光标移至屏幕最后行<br><strong>0</strong>：（注意是数字零）光标移至当前行首<br><strong>$</strong>：光标移至当前行尾   </p>
+</blockquote>
+<h2 id="u5C4F_u5E55_u7FFB_u6EDA_u7C7B_u547D_u4EE4"><a href="#u5C4F_u5E55_u7FFB_u6EDA_u7C7B_u547D_u4EE4" class="headerlink" title="屏幕翻滚类命令"></a>屏幕翻滚类命令</h2><blockquote>
+<p>Ctrl+u：向文件首翻半屏<br>Ctrl+d：向文件尾翻半屏<br>Ctrl+f：向文件尾翻一屏<br>Ctrl＋b；向文件首翻一屏<br>nz：将第n行滚至屏幕顶部，不指定n时将当前行滚至屏幕顶部。   </p>
+</blockquote>
+<h2 id="u63D2_u5165_u6587_u672C_u7C7B_u547D_u4EE4"><a href="#u63D2_u5165_u6587_u672C_u7C7B_u547D_u4EE4" class="headerlink" title="插入文本类命令"></a>插入文本类命令</h2><blockquote>
+<p>i ：在光标前<br>I ：在当前行首<br>a：光标后<br>A：在当前行尾<br>o：在当前行之下新开一行<br>O：在当前行之上新开一行<br>r：替换当前字符<br>R：替换当前字符及其后的字符，直至按ESC键<br>s：从当前光标位置处开始，以输入的文本替代指定数目的字符<br>S：删除指定数目的行，并以所输入文本代替之<br>ncw或nCW：修改指定数目的字<br>nCC：修改指定数目的行   </p>
+</blockquote>
+<h2 id="u5220_u9664_u547D_u4EE4"><a href="#u5220_u9664_u547D_u4EE4" class="headerlink" title="删除命令"></a>删除命令</h2><blockquote>
+<p>ndw或ndW：删除光标处开始及其后的n-1个字<br>do：删至行首<br>d$：删至行尾<br>ndd：删除当前行及其后n-1行<br>x或X：删除一个字符，x删除光标后的，而X删除光标前的<br>Ctrl+u：删除输入方式下所输入的文本   </p>
+</blockquote>
+<h2 id="u641C_u7D22_u53CA_u66FF_u6362_u547D_u4EE4"><a href="#u641C_u7D22_u53CA_u66FF_u6362_u547D_u4EE4" class="headerlink" title="搜索及替换命令"></a>搜索及替换命令</h2><blockquote>
+<p>/pattern：从光标开始处向文件尾搜索pattern<br>?pattern：从光标开始处向文件首搜索pattern<br>n：在同一方向重复上一次搜索命令<br>N：在反方向上重复上一次搜索命令<br>：s/p1/p2/g：将当前行中所有p1均用p2替代<br>：n1,n2s/p1/p2/g：将第n1至n2行中所有p1均用p2替代<br>：g/p1/s//p2/g：将文件中所有p1均用p2替换   </p>
+</blockquote>
+<h2 id="u9009_u9879_u8BBE_u7F6E"><a href="#u9009_u9879_u8BBE_u7F6E" class="headerlink" title="选项设置"></a>选项设置</h2><blockquote>
+<p>all：列出所有选项设置情况<br>term：设置终端类型<br>ignorance：在搜索中忽略大小写<br>list：显示制表位(Ctrl+I)和行尾标志（$)<br>number：显示行号<br>report：显示由面向行的命令修改过的数目<br>terse：显示简短的警告信息<br>warn：在转到别的文件时若没保存当前文件则显示NO write信息<br>nomagic：允许在搜索模式中，使用前面不带“\”的特殊字符<br>nowrapscan：禁止vi在搜索到达文件两端时，又从另一端开始<br>mesg：允许vi显示其他用户用write写到自己终端上的信息   </p>
+</blockquote>
+<h2 id="u6700_u540E_u884C_u65B9_u5F0F_u547D_u4EE4"><a href="#u6700_u540E_u884C_u65B9_u5F0F_u547D_u4EE4" class="headerlink" title="最后行方式命令"></a>最后行方式命令</h2><blockquote>
+<p>：n1,n2 co n3：将n1行到n2行之间的内容拷贝到第n3行下<br>：n1,n2 m n3：将n1行到n2行之间的内容移至到第n3行下<br>：n1,n2 d ：将n1行到n2行之间的内容删除<br>：w ：保存当前文件<br>：e filename：打开文件filename进行编辑<br>：x：保存当前文件并退出<br>：q：退出vi<br>：q!：不保存文件并退出vi<br>：!command：执行shell命令command<br>：n1,n2 w!command：将文件中n1行至n2行的内容作为command的输入并执行之，若不指定n1，n2，则表示将整个文件内容作为command的输入<br>：r!command：将命令command的输出结果放到当前行   </p>
+</blockquote>
+<h2 id="u5BC4_u5B58_u5668_u64CD_u4F5C"><a href="#u5BC4_u5B58_u5668_u64CD_u4F5C" class="headerlink" title="寄存器操作"></a>寄存器操作</h2><blockquote>
+<p>“?nyy：将当前行及其下n行的内容保存到寄存器？中，其中?为一个字母，n为一个数字<br>“?nyw：将当前行及其下n个字保存到寄存器？中，其中?为一个字母，n为一个数字<br>“?nyl：将当前行及其下n个字符保存到寄存器？中，其中?为一个字母，n为一个数字<br>“?p：取出寄存器？中的内容并将其放到光标位置处。这里？可以是一个字母，也可以是一个数字<br>ndd：将当前行及其下共n行文本删除，并将所删内容放到1号删除寄存器中。  </p>
+</blockquote>
+<h2 id="23VI_u7684_u4F7F_u7528"><a href="#23VI_u7684_u4F7F_u7528" class="headerlink" title="#VI的使用"></a>#VI的使用  </h2><h2 id="u63D2_u5165_u6587_u672C"><a href="#u63D2_u5165_u6587_u672C" class="headerlink" title="插入文本"></a>插入文本</h2> <table><br><tr><td>命令</td><td>描述　</td></tr><br><tr><td>i</td><td>在当前字符前插入文本</td></tr><br><tr><td>I</td><td>在行首插入文本</td></tr><br><tr><td>a</td><td>在当前字符后添加文本</td></tr><br><tr><td>A</td><td>在行末添加文本</td></tr><br><tr><td>o</td><td>在当前行后面插入一空行</td></tr><br><tr><td>O</td><td>在当前行前面插入一空行</td></tr><br><tr><td>R</td><td>以改写方式输入文本</td></tr><br></table>
+
+<h2 id="u79FB_u52A8_u5149_u6807"><a href="#u79FB_u52A8_u5149_u6807" class="headerlink" title="移动光标"></a>移动光标</h2> <table><br><tr><td>命令</td><td>描述　</td></tr><br><tr><td>j或下箭头</td><td>向下移动一行</td></tr><br><tr><td>k或上箭头</td><td>向上移动一行</td></tr><br><tr><td>h或左箭头</td><td>左移一个字符</td></tr><br><tr><td>l或右箭头</td><td>右移一个字符</td></tr><br><tr><td>w</td><td>右移一个词</td></tr><br><tr><td>W </td><td>右移一个以空格分隔的词</td></tr><br><tr><td>b</td><td>左移一个词　</td></tr><br><tr><td>B</td><td>左移一个以空格分隔的词　</td></tr><br><tr><td>0</td><td>移到行首　</td></tr><br><tr><td>Ctrl-F</td><td>向前翻页</td></tr><br><tr><td>nG</td><td>到第n行</td></tr><br><tr><td>G</td><td>到最后一行</td></tr><br></table>
+
+<h2 id="u66FF_u6362_u6587_u672C"><a href="#u66FF_u6362_u6587_u672C" class="headerlink" title="替换文本"></a>替换文本</h2> <table><br><tr><td>命令</td><td>描述　</td></tr><br><tr><td>$</td><td>到行尾</td></tr><br><tr><td>(</td><td>到句子的开头</td></tr><br><tr><td>)</td><td>到句子的末尾</td></tr><br><tr><td>{</td><td>到段落的开头</td></tr><br><tr><td>}</td><td>到段落的末尾</td></tr><br></table><br>## 删除文本<br> <table><br><tr><td>命令</td><td>描述　</td></tr><br><tr><td>r</td><td>替换一个字</td></tr><br><tr><td>c</td><td>修改文本直到按下Esc健</td></tr><br><tr><td>cw</td><td>修改下一个词</td></tr><br><tr><td>cnw</td><td>修改接下来的n个词</td></tr><br></table><br>## 文本编辑<br> <table><br><tr><td>命令</td><td>描述　</td></tr><br><tr><td>yy</td><td>将一行文本移到缺省缓冲区中</td></tr><br><tr><td>yn</td><td>将下一个词移到缺省缓冲区中</td></tr><br><tr><td>ynw</td><td>将后面的n个词移到缺省缓冲区中</td></tr><br><tr><td>p </td><td>如果缺省缓冲区中包含一行文本，则在当前行后面插入一个空行井将缺省缓冲区中的容粘贴到这一行中；如果缺省缓冲区中包含多个词，把这些词粘贴到光标的左边</td></tr><br></table><br>## 保存退出<br> <table><br><tr><td>命令</td><td>描述　</td></tr><br><tr><td>zz</td><td>保存并退出</td></tr><br><tr><td>:w filename</td><td>写入文件</td></tr><br><tr><td>:W　</td><td>写入文件</td></tr><br><tr><td>:x </td><td>保存(如果当前文件修改过)并退出</td></tr><br><tr><td>:q! </td><td>不保存文件，直接退出</td></tr><br><tr><td>:q </td><td>退出vi</td></tr><br></table>
+
+
+<h1 id="VI_u5E38_u7528_u6280_u5DE7"><a href="#VI_u5E38_u7528_u6280_u5DE7" class="headerlink" title="VI常用技巧"></a>VI常用技巧</h1><hr>
+<p>VI命令可以说是Unix/Linux世界里最常用的编辑文件的命令了，但是因为它的命令集众多，很多人都不习惯使用它，其实您只需要掌握基本命令，然后加以灵活运用，就会发现它的优势，并会逐渐喜欢使用这种方法。本文旨在介绍VI的一些最常用命令和高级应用技巧。 </p>
+<h2 id="u57FA_u672C_u547D_u4EE4_u4ECB_u7ECD"><a href="#u57FA_u672C_u547D_u4EE4_u4ECB_u7ECD" class="headerlink" title="基本命令介绍"></a>基本命令介绍</h2><h3 id="1_uFF0E_u5149_u6807_u547D_u4EE4"><a href="#1_uFF0E_u5149_u6807_u547D_u4EE4" class="headerlink" title="1．光标命令"></a>1．光标命令</h3><blockquote>
+<p>k、j、h、l——上、下、左、右光标移动命令。<br>虽然您可以在Linux中使用键盘右边的4个光标键，但是记住这4个命令还是非常有用的。这4个键正是右手在键盘上放置的基本位置。<br>nG——跳转命令。n为行数，该命令立即使光标跳到指定行。<br>Ctrl+G——光标所在位置的行数和列数报告。<br>w、b——使光标向前或向后跳过一个单词。 </p>
+<h3 id="2_uFF0E_u7F16_u8F91_u547D_u4EE4"><a href="#2_uFF0E_u7F16_u8F91_u547D_u4EE4" class="headerlink" title="2．编辑命令"></a>2．编辑命令</h3><p>i、a、r——在光标的前、后以及所在处插入字符命令(i=insert、a=append、r=replace)。<br>cw、dw——改变(置换)/删除光标所在处的单词的命令 (c=change、d=delete)。<br>x、d$、dd——删除一个字符、删除光标所在处到行尾的所有字符以及删除整行的命令。 </p>
+<h3 id="3_uFF0E_u67E5_u627E_u547D_u4EE4"><a href="#3_uFF0E_u67E5_u627E_u547D_u4EE4" class="headerlink" title="3．查找命令"></a>3．查找命令</h3><p>/string、?string——从光标所在处向后或向前查找相应的字符串的命令。 </p>
+</blockquote>
+<p>###4．拷贝复制命令 </p>
+<blockquote>
+<p>yy、p——拷贝一行到剪贴板或取出剪贴板中内容的命令。 </p>
+</blockquote>
+<h2 id="u5E38_u89C1_u95EE_u9898_u53CA_u5E94_u7528_u6280_u5DE7"><a href="#u5E38_u89C1_u95EE_u9898_u53CA_u5E94_u7528_u6280_u5DE7" class="headerlink" title="常见问题及应用技巧"></a>常见问题及应用技巧</h2><h3 id="1_uFF0E_u5728_u4E00_u4E2A_u65B0_u6587_u4EF6_u4E2D_u8BFB/etc/passwd_u4E2D_u7684_u5185_u5BB9_uFF0C_u53D6_u51FA_u7528_u6237_u540D_u90E8_u5206_u3002"><a href="#1_uFF0E_u5728_u4E00_u4E2A_u65B0_u6587_u4EF6_u4E2D_u8BFB/etc/passwd_u4E2D_u7684_u5185_u5BB9_uFF0C_u53D6_u51FA_u7528_u6237_u540D_u90E8_u5206_u3002" class="headerlink" title="1．在一个新文件中读/etc/passwd中的内容，取出用户名部分。"></a>1．在一个新文件中读/etc/passwd中的内容，取出用户名部分。</h3><blockquote>
+<p>vi file<br>:r /etc/passwd 在打开的文件file中光标所在处读入/etc/passwd<br>:%s/:.*//g 删除/etc/passwd中用户名后面的从冒号开始直到行尾的所有部分。<br>您也可以在指定的行号后读入文件内容，例如使用命令“:3r /etc/passwd”从新文件的第3行开始读入 /etc/passwd的所有内容。<br>我们还可以使用以下方法删掉文件中所有的空行及以#开始的注释行。<br>$ cat squid.conf.default | grep -v ^$ | grep -v ^# </p>
+</blockquote>
+<h3 id="2_uFF0E_u5728_u6253_u5F00_u4E00_u4E2A_u6587_u4EF6_u7F16_u8F91_u540E_u624D_u77E5_u9053_u767B_u5F55_u7684_u7528_u6237_u5BF9_u8BE5_u6587_u4EF6_u6CA1_u6709_u5199_u7684_u6743_u9650_uFF0C_u4E0D_u80FD_u5B58_u76D8_uFF0C_u9700_u8981_u5C06_u6240_u505A_u4FEE_u6539_u5B58_u5165_u4E34_u65F6_u6587_u4EF6_u3002"><a href="#2_uFF0E_u5728_u6253_u5F00_u4E00_u4E2A_u6587_u4EF6_u7F16_u8F91_u540E_u624D_u77E5_u9053_u767B_u5F55_u7684_u7528_u6237_u5BF9_u8BE5_u6587_u4EF6_u6CA1_u6709_u5199_u7684_u6743_u9650_uFF0C_u4E0D_u80FD_u5B58_u76D8_uFF0C_u9700_u8981_u5C06_u6240_u505A_u4FEE_u6539_u5B58_u5165_u4E34_u65F6_u6587_u4EF6_u3002" class="headerlink" title="2．在打开一个文件编辑后才知道登录的用户对该文件没有写的权限，不能存盘，需要将所做修改存入临时文件。"></a>2．在打开一个文件编辑后才知道登录的用户对该文件没有写的权限，不能存盘，需要将所做修改存入临时文件。</h3><blockquote>
+<p>vi file<br>:w /tmp/1 保存所做的所有修改，也可以将其中的某一部分修改保存到临时文件，例如仅仅把第20～59行之间的内容存盘成文件/tmp/1，我们可以键入如下命令。<br>vi file<br>:20,59w /tmp/1 </p>
+</blockquote>
+<h3 id="3_uFF0E_u7528VI_u7F16_u8F91_u4E00_u4E2A_u6587_u4EF6_uFF0C_u4F46_u9700_u8981_u5220_u9664_u5927_u6BB5_u7684_u5185_u5BB9_u3002"><a href="#3_uFF0E_u7528VI_u7F16_u8F91_u4E00_u4E2A_u6587_u4EF6_uFF0C_u4F46_u9700_u8981_u5220_u9664_u5927_u6BB5_u7684_u5185_u5BB9_u3002" class="headerlink" title="3．用VI编辑一个文件，但需要删除大段的内容。"></a>3．用VI编辑一个文件，但需要删除大段的内容。</h3><blockquote>
+<p>首先利用编辑命令“vi file”打开文件，然后将光标移到需要删除的行处按Ctrl+G显示行号，再到结尾处再按Ctrl+G，显示文件结尾的行号。<br>:23,1045d 假定2次得到的行号为23和1045，则把这期间的内容全删除，也可以在要删除的开始行和结束行中用ma、mb命令标记，然后利用“:a,bd”命令删除。   </p>
+</blockquote>
+<h3 id="4_uFF0E_u5728_u6574_u4E2A_u6587_u4EF6_u7684_u5404_u884C_u6216_u67D0_u51E0_u884C_u7684_u884C_u9996_u6216_u884C_u5C3E_u52A0_u4E00_u4E9B_u5B57_u7B26_u4E32_u3002"><a href="#4_uFF0E_u5728_u6574_u4E2A_u6587_u4EF6_u7684_u5404_u884C_u6216_u67D0_u51E0_u884C_u7684_u884C_u9996_u6216_u884C_u5C3E_u52A0_u4E00_u4E9B_u5B57_u7B26_u4E32_u3002" class="headerlink" title="4．在整个文件的各行或某几行的行首或行尾加一些字符串。"></a>4．在整个文件的各行或某几行的行首或行尾加一些字符串。</h3><blockquote>
+<p>vi file<br>:3,$s/^/some string / 在文件的第一行至最后一行的行首插入“some string”。<br>:%s/$/some string/g 在整个文件每一行的行尾添加“some string”。<br>:%s/string1/string2/g 在整个文件中替换“string1”成“string2”。<br>:3,7s/string1/string2/ 仅替换文件中的第3行到第7行中的“string1”成“string2”。<br>注意: 其中s为substitute，%表示所有行，g表示global。 </p>
+</blockquote>
+<h3 id="5_uFF0E_u540C_u65F6_u7F16_u8F912_u4E2A_u6587_u4EF6_uFF0C_u62F7_u8D1D_u4E00_u4E2A_u6587_u4EF6_u4E2D_u7684_u6587_u672C_u5E76_u7C98_u8D34_u5230_u53E6_u4E00_u4E2A_u6587_u4EF6_u4E2D_u3002"><a href="#5_uFF0E_u540C_u65F6_u7F16_u8F912_u4E2A_u6587_u4EF6_uFF0C_u62F7_u8D1D_u4E00_u4E2A_u6587_u4EF6_u4E2D_u7684_u6587_u672C_u5E76_u7C98_u8D34_u5230_u53E6_u4E00_u4E2A_u6587_u4EF6_u4E2D_u3002" class="headerlink" title="5．同时编辑2个文件，拷贝一个文件中的文本并粘贴到另一个文件中。"></a>5．同时编辑2个文件，拷贝一个文件中的文本并粘贴到另一个文件中。</h3><blockquote>
+<p>vi file1 file2<br>yy 在文件1的光标处拷贝所在行<br>:n 切换到文件2 (n=next)<br>p 在文件2的光标所在处粘贴所拷贝的行<br>:n 切换回文件1   </p>
+</blockquote>
+<h3 id="6_uFF0E_u66FF_u6362_u6587_u4EF6_u4E2D_u7684_u8DEF_u5F84_u3002"><a href="#6_uFF0E_u66FF_u6362_u6587_u4EF6_u4E2D_u7684_u8DEF_u5F84_u3002" class="headerlink" title="6．替换文件中的路径。"></a>6．替换文件中的路径。</h3><p>使用命令</p>
+<blockquote>
+<p>“:%s#/usr/bin#/bin#g”  </p>
+</blockquote>
+<p>可以把文件中所有路径<code>/usr/bin</code>换成<code>/bin</code>。也可以使用命令</p>
+<blockquote>
+<p>“:%s//usr/bin//bin/g”  </p>
+</blockquote>
+<p>实现，其中<strong>“”</strong>是转义字符，表明其后的<strong>“/“</strong>字符是具有实际意义的字符，不是分隔符。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -440,1028 +1422,10 @@ the Guest Additions kernel module.
       
         
           
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/01/elasticsearch-笔记/" itemprop="url">
-                  elasticsearch 笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-01T10:11:00+08:00" content="2017-06-01">
-              2017-06-01
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/01/elasticsearch-笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/01/elasticsearch-笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
             <blockquote>
-<p><a href="https://github.com/mobz/elasticsearch-head#running-with-built-in-server" title="插件地址：github" target="_blank" rel="external">elasticsearch-head 插件地址：github</a> </p>
+<p>本系列针对hadoop1.12版本进行学习实践并做相应的笔记  </p>
 </blockquote>
-<p>There are multiple ways of running elasticsearch-head.</p>
-<p>##Running with built in server</p>
-<ul>
-<li>git clone git://github.com/mobz/elasticsearch-head.git</li>
-<li>cd elasticsearch-head</li>
-<li>npm install</li>
-<li>npm run start</li>
-<li>open <a href="http://localhost:9100/" target="_blank" rel="external">http://localhost:9100/</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/16/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/" itemprop="url">
-                  大数据分析平台 apahce kylin 实践-1.初识apache kylin
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-16T10:39:46+08:00" content="2017-01-16">
-              2017-01-16
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/16/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/16/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>一. apache kylin 简介
-二. Apache kylin 的工作机制
-三. 小结-kylin的优劣
-四. 实践场景思考-水资源取水户统计分析场景
-五. 场景演示
-</code></pre><h2 id="Apache_kylin_u662F_u4EC0_u4E48"><a href="#Apache_kylin_u662F_u4EC0_u4E48" class="headerlink" title="Apache kylin是什么"></a>Apache kylin是什么</h2><p><a href="http://kylin.apache.org/" target="_blank" rel="external">Apache kylin</a> 是一个开源的分布式分析引擎。它通过ANSI-SQL接口，提供基于hadoop的超大数据集（TB-PB级）的多维分析（<a href="http://blog.csdn.net/zhangzheng0413/article/details/8271322/" target="_blank" rel="external">OLAP</a>）功能。</p>
-<p>只需三步，kylin即可实现超大数据集上的亚秒级（sub-second latency）查询。</p>
-<blockquote>
-<ol>
-<li>确定hadoop上一个<a href="http://blog.csdn.net/huojiao2006/article/details/51209982" target="_blank" rel="external">星型模式</a>（wiki:Star schema）的数据集。</li>
-<li>构建<a href="http://www2.cs.uregina.ca/~dbd/cs831/notes/dcubes/dcubes.html" target="_blank" rel="external">数据立方体</a>（wiki:Data cube）。</li>
-<li>可通过ODBC, JDBC,RESTful API等接口在亚秒级的延迟内查询相关数据。</li>
-</ol>
-</blockquote>
-<p><img src="/images/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/kylin_diagram.png" alt="" title="com_update"> </p>
-<h2 id="Apache_kylin__u7684_u5DE5_u4F5C_u673A_u5236"><a href="#Apache_kylin__u7684_u5DE5_u4F5C_u673A_u5236" class="headerlink" title="Apache kylin 的工作机制"></a>Apache kylin 的工作机制</h2><h3 id="kylin__u5DE5_u4F5C_u6982_u5FF5"><a href="#kylin__u5DE5_u4F5C_u6982_u5FF5" class="headerlink" title="kylin 工作概念"></a>kylin 工作概念</h3><p><strong>Apache kylin</strong> 能提供低延迟（sub-second latency）的秘诀就是预计算，即针对一个星型拓扑结构的数据立方体，预计算多个维度组合的度量，然后将结果保存在hbase中，对外暴露JDBC、ODBC、Rest API的查询接口，即可实现实时查询。<br>数据立方体一般由Hive中的一个<strong>事实表</strong>,多个<strong>查找表</strong>组成。预计算的过程在kylin中就是Cube 的build过程.</p>
-<h3 id="kylin__u6838_u5FC3_u6982_u5FF5"><a href="#kylin__u6838_u5FC3_u6982_u5FF5" class="headerlink" title="kylin 核心概念"></a>kylin 核心概念</h3><p><strong>表（Table）</strong>：表定义在hive中，是数据立方体(Data cube)的数据源，在build cube 之前，必须同步在kylin中。</p>
-<p><strong>模型(model)</strong>:模型描述了一个星型模式的数据结构，它定义了一个<a href="https://en.wikipedia.org/wiki/Fact_table" title="wiki:Fact table" target="_blank" rel="external">事实表（Fact Table）</a>和多个<a href="https://en.wikipedia.org/wiki/Lookup_table" title="wiki:lookuup Table" target="_blank" rel="external">查找表（Lookup Table）</a>的连接和过滤关系。  </p>
-<p><strong>立方体(Cube)</strong>：它定义了使用的模型、模型中的表的<a href="https://en.wikipedia.org/wiki/Dimension" title="Wiki:dimension" target="_blank" rel="external">维度（dimension）</a>、<a href="https://en.wikipedia.org/wiki/Measure" title="Wiki:measure" target="_blank" rel="external">度量（measure)</a> ,一般指聚合函数，如：sum、count、average等）、如何对段分区(segments partition)、合并段(segments auto-merge)等的规则。   </p>
-<p><strong>立方体段(Cube Segment)</strong>：它是立方体构建(build)后的数据载体，一个 segment 映射hbase中的一张表，立方体实例构建(build)后，会产生一个新的segment，一旦某个已经构建的立方体的原始数据发生变化，只需刷新（fresh）变化的时间段所关联的segment即可。  </p>
-<p><strong>作业(Job)</strong>：对立方体实例发出构建（build）请求后，会产生一个作业。该作业记录了立方体实例build时的每一步任务信息。作业的状态信息反映构建立方体实例的结果信息。</p>
-<ul>
-<li><strong>NEW</strong> - This denotes one job has been just created.</li>
-<li><strong>PENDING</strong> - This denotes one job is paused by job scheduler and waiting for   resources.</li>
-<li><strong>RUNNING</strong> - This denotes one job is running in progress.</li>
-<li><strong>FINISHED</strong> - This denotes one job is successfully finished.</li>
-<li><strong>ERROR</strong> - This denotes one job is aborted with errors.</li>
-<li><strong>DISCARDED</strong> - This denotes one job is cancelled by end users.<h2 id="kylin__u5DE5_u4F5C_u673A_u5236"><a href="#kylin__u5DE5_u4F5C_u673A_u5236" class="headerlink" title="kylin 工作机制"></a>kylin 工作机制</h2><a href="http://blog.csdn.net/ebay/article/details/48494675" target="_blank" rel="external">Apache Kylin的快速数据立方体算法</a></li>
-</ul>
-<h2 id="u5C0F_u7ED3-kylin_u7684_u4F18_u52A3"><a href="#u5C0F_u7ED3-kylin_u7684_u4F18_u52A3" class="headerlink" title="小结-kylin的优劣"></a>小结-kylin的优劣</h2><h3 id="u4E3B_u6D41_u5927_u6570_u636E_u5206_u6790_u5DE5_u5177_u6BD4_u8F83"><a href="#u4E3B_u6D41_u5927_u6570_u636E_u5206_u6790_u5DE5_u5177_u6BD4_u8F83" class="headerlink" title="主流大数据分析工具比较"></a>主流大数据分析工具比较</h3><h4 id="u5B98_u65B9_u7406_u7531"><a href="#u5B98_u65B9_u7406_u7531" class="headerlink" title="官方理由"></a>官方理由</h4><p><img src="/images/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/compare.png" alt="" title="官方对比例子"> </p>
-<h4 id="u77E5_u4E4E_u8BC4_u8BBA"><a href="#u77E5_u4E4E_u8BC4_u8BBA" class="headerlink" title="知乎评论"></a>知乎评论</h4><ul>
-<li><strong>presto</strong>：facebook开源的一个java写的分布式数据查询框架，原生集成了Hive、Hbase和关系型数据库，Presto背后所使用的执行模式与Hive有根本的不同，它没有使用MapReduce，大部分场景下比hive快一个数量级，其中的关键是所有的处理都在内存中完成。</li>
-<li><strong>Druid</strong>：是一个实时处理时序数据的Olap数据库，因为它的索引首先按照时间分片，查询的时候也是按照时间线去路由索引。</li>
-<li><strong>spark SQL</strong>：基于spark平台上的一个olap框架，本质上也是基于<a href="http://stackoverflow.com/questions/25836316/how-dag-works-under-the-covers-in-rdd" target="_blank" rel="external">DAG(Directed acyclic graph)</a>的<a href="http://www.cnblogs.com/yubo/archive/2010/04/23/1718810.html" target="_blank" rel="external">MPP(Massive Parallel Processing)</a>， 基本思路是增加机器来并行计算，从而提高查询速度。</li>
-<li><strong>kylin</strong>：核心是Cube，cube是一种预计算技术，基本思路是预先对数据作多维索引，查询时只扫描索引而不访问原始数据从而提速</li>
-</ul>
-<p>这几种框架各有优缺点，存在就是合理，如何选型个人看法如下：<br>从成熟度来讲：kylin&gt;spark sql&gt;Druid&gt;presto<br>从超大数据的查询效率来看：Druid&gt;kylin&gt;presto&gt;spark sql<br>从支持的数据源种类来讲：presto&gt;spark sql&gt;kylin&gt;Druid  </p>
-<h3 id="kylin_u9009_u53D6_u573A_u666F_u8003_u8651_uFF1A"><a href="#kylin_u9009_u53D6_u573A_u666F_u8003_u8651_uFF1A" class="headerlink" title="kylin选取场景考虑："></a>kylin选取场景考虑：</h3><ol>
-<li>大数据量情况下满足秒级多维分析</li>
-<li>需要支持水平扩展</li>
-<li>在大数据量基础上使用标准SQL查询小数据量结果集能够达到毫秒级</li>
-<li>需要支持与传统BI工具无缝集成，如Tableau, PowerBI，Excel</li>
-<li>是否基于Hadoop生态系统</li>
-</ol>
-<h2 id="u5B9E_u8DF5_u573A_u666F_u601D_u8003-_u6C34_u8D44_u6E90_u53D6_u6C34_u6237_u7EDF_u8BA1_u5206_u6790_u573A_u666F"><a href="#u5B9E_u8DF5_u573A_u666F_u601D_u8003-_u6C34_u8D44_u6E90_u53D6_u6C34_u6237_u7EDF_u8BA1_u5206_u6790_u573A_u666F" class="headerlink" title="实践场景思考-水资源取水户统计分析场景"></a>实践场景思考-水资源取水户统计分析场景</h2><p><img src="/images/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/waterPro.png" alt="" title="水资源取水户关系模型"> </p>
-<h3 id="u9700_u6C42_uFF1A__u5F53_u524D_u65E5_u671F_u6C47_u96C6_u524D_u4E00_u5929_uFF0C"><a href="#u9700_u6C42_uFF1A__u5F53_u524D_u65E5_u671F_u6C47_u96C6_u524D_u4E00_u5929_uFF0C" class="headerlink" title="需求： 当前日期汇集前一天，"></a>需求： 当前日期汇集前一天，</h3><p>各取水户的月累计、年累计取水量<br>各县、市、省的月累计取水量、年累计取水量<br>各水资源三级、二级、一级 分区月累计取水量、年累计取水量<br>全国月累计取水量、年累计取水量</p>
-<h3 id="u5206_u89E3"><a href="#u5206_u89E3" class="headerlink" title="分解"></a>分解</h3><h4 id="u4E8B_u5B9E_u8868"><a href="#u4E8B_u5B9E_u8868" class="headerlink" title="事实表"></a>事实表</h4><p>定义宽表:  </p>
-<ul>
-<li><strong>省|市|县|取水户|取水点|时间|日水量</strong>   </li>
-<li><strong>水资源一级分区|水资源二级分区|水资源三级分区|取水户|取水点|时间|日水量</strong></li>
-</ul>
-<h4 id="u7EF4_u5EA6_u8868"><a href="#u7EF4_u5EA6_u8868" class="headerlink" title="维度表"></a>维度表</h4><ul>
-<li>时间维度： 年、月、日，其中天为最小粒度，也为该表主键</li>
-<li>取水点维表</li>
-<li>取水户维表</li>
-<li>县维表</li>
-<li>市维表</li>
-<li>省维表</li>
-<li>水资源三级分区</li>
-<li>水资源二级分区</li>
-<li>水资源一级分区</li>
-</ul>
-<h4 id="u521B_u5EFAcube_u53C2_u8003"><a href="#u521B_u5EFAcube_u53C2_u8003" class="headerlink" title="创建cube参考"></a>创建cube参考</h4><p><a href="http://kylin.apache.org/cn/docs15/tutorial/create_cube.html" target="_blank" rel="external">Kylin Cube 创建教程</a></p>
-<p><code>下个章节将对上述场景，着手安装kylin 、 创建相应的cube并进行</code></p>
-<p>参考文档：<br><a href="http://www.cnblogs.com/hark0623/p/5546082.html" target="_blank" rel="external">[1] Kylin的cube模型</a><br><a href="http://blog.csdn.net/ebay/article/details/48494675" target="_blank" rel="external">[2] Apache Kylin的快速数据立方体算法——概述</a><br><a href="http://www2.cs.uregina.ca/~dbd/cs831/notes/dcubes/dcubes.html" target="_blank" rel="external">[3] Data Cubes</a><br><a href="https://zhuanlan.zhihu.com/p/22140856" target="_blank" rel="external">[4] Apache kylin内部解剖</a><br><a href="https://zhuanlan.zhihu.com/p/22082046" target="_blank" rel="external">[5] Apache kylin 介绍篇</a><br><a href="http://blog.csdn.net/zhangzheng0413/article/details/8271322/" target="_blank" rel="external">[6] OLAP、OLTP的介绍和比较</a><br><a href="http://www.csdn.net/article/2015-11-27/2826343?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">[7] 京东王晓雨：Apache Kylin在云海的实践</a><br><a href="http://www.itnpc.com/news/web/146889317892719.html" target="_blank" rel="external">[8] apache-kylin完整安装流程</a>  </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/03/python笔记01/" itemprop="url">
-                  未命名
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-03T13:47:09+08:00" content="2016-11-03">
-              2016-11-03
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/03/python笔记01/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/03/python笔记01/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/04/数据库优化-mysql调优化思路01/" itemprop="url">
-                  mysql数据库-调优优化思路01
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-04T17:26:02+08:00" content="2016-10-04">
-              2016-10-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/04/数据库优化-mysql调优化思路01/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/04/数据库优化-mysql调优化思路01/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>一. 宏观性能的衡量标准
-二. 业务数据库性能诊断策略
-三. 微观性能诊断解析
-</code></pre><p>参考文档：<br>    <a href="http://www.2cto.com/database/201501/372275.html" target="_blank" rel="external">MySQL几点重要的性能指标计算和优化</a></p>
-<h3 id="u4E00-__u5B8F_u89C2_u6027_u80FD_u7684_u8861_u91CF_u6807_u51C6_28_u4EE5_u4E0B_u53EA_u9488_u5BF9innodb_u5F15_u64CE_29"><a href="#u4E00-__u5B8F_u89C2_u6027_u80FD_u7684_u8861_u91CF_u6807_u51C6_28_u4EE5_u4E0B_u53EA_u9488_u5BF9innodb_u5F15_u64CE_29" class="headerlink" title="一. 宏观性能的衡量标准(以下只针对innodb引擎)"></a>一. 宏观性能的衡量标准(以下只针对innodb引擎)</h3><p>mysql 在业务系统运行过程中，可以通过各种手段对自身的数据库进行评估确定数据库的性能。针对性能的评估标准可以通过以下主要的指标来进行衡量</p>
-<h4 id="1-_QPS__28_u6BCF_u79D2_u67E5_u8BE2_u6570_29"><a href="#1-_QPS__28_u6BCF_u79D2_u67E5_u8BE2_u6570_29" class="headerlink" title="1. QPS (每秒查询数)"></a>1. QPS (每秒查询数)</h4><p>对于innodb引擎，可以使用该公式计算出数据库的QPS:  </p>
-<p><code>QPS = (com_update + com_insert + com_delete + com_select)/uptime</code></p>
-<p><code>com_update</code>,<code>com_insert</code>,<code>com_delete</code>,<code>com_select</code> 分别为增删改查消耗的时间，可以通过查询数据库的<code>status</code>进行获得</p>
-<p><strong>com_update</strong></p>
-<p><img src="/images/com_update.png" alt="" title="com_update">  </p>
-<p><strong>com_insert</strong>  </p>
-<p><img src="/images/com_insert.png" alt="" title="com_insert"> </p>
-<p><strong>com_delete</strong>  </p>
-<p><img src="/images/com_delete.png" alt="" title="com_delete"> </p>
-<p><strong>com_select</strong>  </p>
-<p><img src="/images/com_select.png" alt="" title="com_select"> </p>
-<p><strong>uptime</strong>  </p>
-<p><img src="/images/uptime.png" alt="" title="uptime"> </p>
-<p>QPS = （147876+790213+376+3582553）/7166937 = 0.6308159259666996</p>
-<h4 id="2-_TPS__28_u6BCF_u79D2_u4E8B_u52A1_u6570__u6216_u8005__u541E_u5410_u91CF_29"><a href="#2-_TPS__28_u6BCF_u79D2_u4E8B_u52A1_u6570__u6216_u8005__u541E_u5410_u91CF_29" class="headerlink" title="2. TPS (每秒事务数 或者 吞吐量)"></a>2. TPS (每秒事务数 或者 吞吐量)</h4><p><code>TPS=(com_commit+com_rollback)/uptime</code>  </p>
-<p><img src="/images/TPS.png" alt="" title="TPS"> </p>
-<p>TPS = (763010 + 19665)/7167702 = 0.1091946902926489  </p>
-<h3 id="u4E8C-__u4E1A_u52A1_u6570_u636E_u5E93_u6027_u80FD_u8BCA_u65AD_u7B56_u7565"><a href="#u4E8C-__u4E1A_u52A1_u6570_u636E_u5E93_u6027_u80FD_u8BCA_u65AD_u7B56_u7565" class="headerlink" title="二. 业务数据库性能诊断策略"></a>二. 业务数据库性能诊断策略</h3><p><img src="/images/mysql-strategy.png" alt="" title="TPS"> </p>
-<h3 id="u4E09-__u5FAE_u89C2_u6027_u80FD_u7684_u8BCA_u65AD_u89E3_u6790_28_u4EE5_u4E0B_u53EA_u9488_u5BF9innodb_u5F15_u64CE_29"><a href="#u4E09-__u5FAE_u89C2_u6027_u80FD_u7684_u8BCA_u65AD_u89E3_u6790_28_u4EE5_u4E0B_u53EA_u9488_u5BF9innodb_u5F15_u64CE_29" class="headerlink" title="三. 微观性能的诊断解析(以下只针对innodb引擎)"></a>三. 微观性能的诊断解析(以下只针对innodb引擎)</h3><h4 id="1-__u7EBF_u7A0B_u8FDE_u63A5_u6570_u548C_u547D_u4E2D_u7387_uFF08_u5E76_u53D1_u6027_uFF09"><a href="#1-__u7EBF_u7A0B_u8FDE_u63A5_u6570_u548C_u547D_u4E2D_u7387_uFF08_u5E76_u53D1_u6027_uFF09" class="headerlink" title="1. 线程连接数和命中率（并发性）"></a>1. 线程连接数和命中率（并发性）</h4><p><img src="/images/concurrent.png" alt="" title="线程连接数和命中率">   </p>
-<ul>
-<li>Threads_cached: 代表当前此时此刻线程缓存中有多少空闲线程  </li>
-<li>Threads_connected:代表当前已建立连接的数量，因为一个连接就需要一个线程，所以也可以看成当前被使用的线程数  </li>
-<li>Threads_created: 代表从最近一次服务启动，已创建线程的数量  </li>
-<li>Threads_running: 代表当前激活的（非睡眠状态）线程数  </li>
-<li>thread_cache_size: 线程缓存个数  </li>
-</ul>
-<p><code>线程缓存命中率=1-Threads_created/Connections</code></p>
-<p>根据Threads_connected可预估thread_cache_size值应该设置多大. 如果内存足够大，也可以设置成thread_cache_size值和threaads_connected值相同；</p>
-<p>或者通过观察threads_created值，如果该值很大或一直在增长，可以适当增加thread_cache_size的值；在休眠状态下每个线程占用大概256KB左右的内存，所以当内存足够时，设置太小也不会节约太多内存，除非该值已经超过几千。  </p>
-<p><strong>thread_cache_size缓存个数设置</strong></p>
-<p>mysql&gt; show variables like ‘%thread_cache_size%’;<br>+——————-+——-+<br>| Variable_name     | Value |<br>+——————-+——-+<br>| thread_cache_size | 9     |<br>+——————-+——-+  </p>
-<p>mysql&gt; set global thread_cache_size=16</p>
-<p>永久修改<br>vi /etc/my.cnf 配置文件，[mysqld] 下增加<br>thread_cache_size = 64 </p>
-<h4 id="2-__u6700_u5927_u8FDE_u63A5_u6570"><a href="#2-__u6700_u5927_u8FDE_u63A5_u6570" class="headerlink" title="2. 最大连接数"></a>2. 最大连接数</h4><p><img src="/images/connections.png" alt="" title="TPS"> </p>
-<p>通常max_connections的大小应该设置为比Max_used_connections状态值大，Max_used_connections状态值反映服务器连接在某个时间段是否有尖峰，如果该值大于max_connections值，代表客户端至少被拒绝了一次，可以简单地设置为符合以下条件：Max_used_connections/max_connections=0.8</p>
-<h4 id="3-__u7F13_u5B58_u547D_u4E2D_u7387"><a href="#3-__u7F13_u5B58_u547D_u4E2D_u7387" class="headerlink" title="3. 缓存命中率"></a>3. 缓存命中率</h4><p>mysql&gt; show global status like ‘innodb_buffer_pool_read%’;<br>+—————————————+———–+<br>| Variable_name                         | Value     |<br>+—————————————+———–+<br>| Innodb_buffer_pool_read_ahead_rnd     | 0         |<br>| Innodb_buffer_pool_read_ahead         | 0         |//预读的页数<br>| Innodb_buffer_pool_read_ahead_evicted | 0         |<br>| Innodb_buffer_pool_read_requests      | 144572627 |//从缓冲池中读取的次数<br>| Innodb_buffer_pool_reads              | 289       |//表示从物理磁盘读取的页数<br>+—————————————+———–+<br>5 rows in set (0.00 sec)</p>
-<p><code>缓冲池命中率 = (Innodb_buffer_pool_read_requests)/(Innodb_buffer_pool_read_requests + Innodb_buffer_pool_read_ahead + Innodb_buffer_pool_reads)=99.994%</code></p>
-<p>如果该值小于99.9%，建议就应该增大innodb_buffer_pool_size的值了，该值一般设置为内存总大小的75%-85%，或者计算出操作系统所需缓存+mysql每个连接所需的内存（例如排序缓冲和临时表）+MyISAM键缓存，剩下的内存都给innodb_buffer_pool_size，不过也不宜设置太大，会造成内存的频繁交换，预热和关闭时间长等问题。</p>
-<h4 id="4-_join_u64CD_u4F5C_u4FE1_u606F"><a href="#4-_join_u64CD_u4F5C_u4FE1_u606F" class="headerlink" title="4. join操作信息"></a>4. join操作信息</h4><p><img src="/images/joins.png" alt="" title="joins">  </p>
-<p><strong>状态变量解析</strong><br>| Select_full_join | 应用到其他表，没有使用索引的联接的数量，值很大说明join语句写得很有问题<br>| Select_full_range_join | 应用到其他表，在引用的表中使用范围搜索的联接的数量 select <em> from A,B where A.columnx=1 and B.columnx between 1 and 100<br>| Select_range | 仅应用到第一个表，在第一个表中使用范围的联接的数量，该值很大说明join写得没有问题，通常可查看select_full_join和select_range的比值来判断系统中join语句的性能情况<br>| Select_range_check | 应用到其他表，每一次range索引扫描范围是不确定的 select </em> from A,B where B.columnx&gt;A.columnx<br>| Select_scan | 仅应用到第一个表，对第一个表进行完全扫描的联接的数量<br>| Sort_merge_passes | 使用临时文件重排序的数量<br>| Sort_range | 在范围内执行的排序的数量<br>| Sort_rows | 已经排序的行数<br>| Sort_scan | 通过扫描表完成的排序的数量</p>
-<p>快慢：（快）Select_full_range_join &lt; Select_range_check &lt; Select_full_join（慢）  </p>
-<h4 id="5-__u6162_u67E5_u8BE2"><a href="#5-__u6162_u67E5_u8BE2" class="headerlink" title="5. 慢查询"></a>5. 慢查询</h4><p><img src="/images/slowquery.png" alt="" title="slowquery">   </p>
-<p>该值表示mysql启动以来的慢查询个数，即执行时间超过<code>long_query_time</code>的次数，可根据Slow_queries/uptime 的比值判断单位时间内的慢查询个数，进而判断系统的性能。</p>
-<h5 id="5-1__u6162_u67E5_u8BE2_u4ECB_u7ECD"><a href="#5-1__u6162_u67E5_u8BE2_u4ECB_u7ECD" class="headerlink" title="5.1 慢查询介绍"></a>5.1 慢查询介绍</h5><p><strong>修改慢查询的时间（1为1秒）</strong></p>
-<p><code>mysql&gt; set global long_query_time=1;</code>  //全局<br><code>mysql&gt; set session long_query_time=1;</code> //session级别 </p>
-<p><strong>显示慢查询的时间值的命令</strong> </p>
-<p><code>mysql&gt; show variables like &#39;long_query_time&#39;;</code></p>
-<p><strong>统计慢查询次数</strong>（一条sql语句执行所需时间超过慢查询设置的时间，就统计一次）  </p>
-<p><code>mysql&gt; show status like &#39;slow_queries&#39;;</code>  </p>
-<p><strong>统计未使用索引</strong>（一条sql语句执行未使用到相关索引，就统计一次）  </p>
-<p><code>mysql&gt; set global log_queries_not_using_indexes=1;</code></p>
-<h5 id="5-2__u5B9A_u4F4D_u6162_u67E5_u8BE2_u7684sql_u8BED_u53E5"><a href="#5-2__u5B9A_u4F4D_u6162_u67E5_u8BE2_u7684sql_u8BED_u53E5" class="headerlink" title="5.2  定位慢查询的sql语句"></a>5.2  定位慢查询的sql语句</h5><ol>
-<li><p>查询是否开启了慢查询日志<br> <code>mysql&gt; show variables like &#39;%slow%&#39;;</code><br>如果slow_query_log 为 off，则  </p>
-<p> <code>mysql&gt; set global slow_query_log=1;</code> </p>
-</li>
-<li><p>查询是否开启未使用索引日志</p>
-<p> <code>show variables like &#39;%log_queries_not_using_indexes&#39;;</code>  </p>
-</li>
-</ol>
-<p>log_queries_not_using_indexes 为 off，则  </p>
-<p><code>mysql&gt; set global log_queries_not_using_indexes=1;</code></p>
-<ol>
-<li><p>在mysql的/etc/my.cnf(linux), my.ini(window)中，查找datadir  </p>
-<p> <code>datadir=xxxxxxxx</code><br>在datadir这个目录下，会生成一个log日志，里面即可定位慢查询的sql语句！  </p>
-</li>
-<li><p>格式化慢查询日志   </p>
-<p> <code>mysqldumpslow -s at,al /var/lib/mysql/xxxxx-slow.log</code>   </p>
-</li>
-</ol>
-<p><strong>下一章节将介绍系统测试数据性能的方法，如脚本awk获取status状态，mysqlslap、<br>sysbench、tpcc 等测试工具针对的运用。</strong></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/27/mysql技术内幕笔记-02/" itemprop="url">
-                  mysql技术内幕笔记 02
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-27T11:27:55+08:00" content="2016-09-27">
-              2016-09-27
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/27/mysql技术内幕笔记-02/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/mysql技术内幕笔记-02/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0"><a href="#mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0" class="headerlink" title="mysql技术内幕sql编程笔记"></a>mysql技术内幕sql编程笔记</h3><h4 id="02__u7B2C_u4E09_u7AE0"><a href="#02__u7B2C_u4E09_u7AE0" class="headerlink" title="02 第三章"></a>02 第三章</h4><h4 id="1-__u903B_u8F91_u67E5_u8BE2_u5904_u7406_u7684_u5404_u4E2A_u9636_u6BB5"><a href="#1-__u903B_u8F91_u67E5_u8BE2_u5904_u7406_u7684_u5404_u4E2A_u9636_u6BB5" class="headerlink" title="1. 逻辑查询处理的各个阶段"></a>1. 逻辑查询处理的各个阶段</h4><p>图显示了逻辑查询的顺序，最先执行的是<code>From</code> 操作，最后执行的是<code>limit</code>操作。每个操作都会产生一张虚拟表的输出，该虚拟表作为下一个处理的输入，但只有最后一步生成的虚拟表才会返回给用户，在图中的步骤中若没有在查询中指定某一个子句，则将跳过相应的步骤。<br><img src="/images/03-1.png" alt="" title="逻辑查询步骤">  </p>
-<ol>
-<li><strong>FROM</strong>: 对<code>FROM</code>子句中的左表〈left table〉和右表〈right table〉执行笛卡儿    积（Cartesian product）,输出虚拟表 VT1  </li>
-<li><strong>ON</strong>: 对虚拟表VT1应用<code>ON</code>筛选， 只有符合<join\_condition>的行才被插入虚    拟表输出VT2  </join\_condition></li>
-<li><strong>JOIN</strong>:如果指定了<code>OUTER JOIN</code>(如LEFT OUTER JOIN、 RIGHT OUTER JOIN), 那    么保留表中未匹配的行为作为外部行添加到虚拟表VT2中，产生虚拟表VT3. 如果<code>FROM</code>子    句包含两个表以上，则对上一个连接生成的结果表VT3和下一个表重复执行步骤1~步骤3,直    到处理完所有的表为止。  </li>
-<li><strong>WHERE</strong>: 对虚拟表VT3应用WHERE过滤条件，只有符合〈WHERE_CONDITION〉的记录才    被插入虚拟表VT4中  </li>
-<li><strong>GROUP BY</strong>: 根据GROUP BY 子句中的列，对VT4的记录进行分组操作，产生VT5  </li>
-<li><strong>CUBE|ROLLUP</strong>: 对表VT5进行CUBE或ROLLUP操作，产生VT6  </li>
-<li><strong>HAVING</strong>: 对虚拟表VT6应用HAVING 过滤器， 只有符合〈having_condiotion〉的记录才被插入虚拟表VT7中  </li>
-<li><strong>SELECT</strong>：第二次执行select操作，选择指定的列，插入到虚拟表VT8中  </li>
-<li><strong>DISTINCT</strong>: 去除重复数据，产生虚拟表VT9    </li>
-<li><strong>ORDER BY</strong> : 将虚拟表VT9中的记录按照〈order_by_list&gt;进行排序操作，产生虚拟表VT10  </li>
-<li><strong>LIMIT</strong>: 取出指定行的记录，产生虚拟表VT11，并返回给查询用户<h4 id="2-__u7269_u7406_u67E5_u8BE2"><a href="#2-__u7269_u7406_u67E5_u8BE2" class="headerlink" title="2. 物理查询"></a>2. 物理查询</h4>mysql中存在Parser 和 Optionmizer两个组件；parser的工作就是分析SQL语句，而OPtimizer就是针对这个SQL进行优化，选择一条最优的路径选取数据，但必须保证物理查询是的最终结果和逻辑查询处理的结果是相等的。</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/27/inside-mysql-notes/" itemprop="url">
-                  mysql技术内幕笔记-01
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-27T10:39:50+08:00" content="2016-08-27">
-              2016-08-27
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/27/inside-mysql-notes/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/inside-mysql-notes/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0"><a href="#mysql_u6280_u672F_u5185_u5E55sql_u7F16_u7A0B_u7B14_u8BB0" class="headerlink" title="mysql技术内幕sql编程笔记"></a>mysql技术内幕sql编程笔记</h3><h4 id="01__u7B2C_u4E00_u7AE0"><a href="#01__u7B2C_u4E00_u7AE0" class="headerlink" title="01 第一章"></a>01 第一章</h4><h4 id="1-_OLTP__u4E0EOLAP"><a href="#1-_OLTP__u4E0EOLAP" class="headerlink" title="1. OLTP 与OLAP"></a>1. OLTP 与OLAP</h4><p>OLTP主要执行基本的、日常的事务处理，一般特点为：  </p>
-<ul>
-<li>实时性要求高  </li>
-<li>查询数据量比较小  </li>
-<li>交易一般是确定的  </li>
-<li>并发性要求高<br>OLAP是数据仓库系统的主要应用，典型的应用就是复杂的报表系统。一般物点为：</li>
-<li>实时性要求不是很高  </li>
-<li>数据量大</li>
-<li>重点在于决策支持，所以查询一般是动态的，即允许用户随时提出查询的特定要求。</li>
-</ul>
-<p><img src="/images/01.png" alt="OLTP 与 OLAP 的区别" title="OLTP 与 OLAP 的区别"></p>
-<h4 id="2-_Mysql__u7684_u4F53_u7CFB_u7ED3_u6784"><a href="#2-_Mysql__u7684_u4F53_u7CFB_u7ED3_u6784" class="headerlink" title="2. Mysql 的体系结构"></a>2. Mysql 的体系结构</h4><p>mysql数据库由以下部分组成：</p>
-<ul>
-<li>连接池组件(connection pool)  </li>
-<li>管理服务和工具组件(Management Services &amp; Utilities)  </li>
-<li>SQL 接口组件(SQL interface)  </li>
-<li>查询分析器组件(Parser)  </li>
-<li>优化器组件(Optionmizer) </li>
-<li>缓冲组件(Caches &amp; Buffers)  </li>
-<li>插件式存储引擎(Pluggable Storage Engines)  </li>
-<li>物理文件(File System)<br><img src="/images/02.png" alt="" title="mysql 体系结构图"></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/24/nexus-tutorials/" itemprop="url">
-                  nexus 更新索引
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-24T16:48:25+08:00" content="2016-08-24">
-              2016-08-24
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/24/nexus-tutorials/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/24/nexus-tutorials/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="nexus__u66F4_u65B0_u7D22_u5F15_u89E3_u51B3"><a href="#nexus__u66F4_u65B0_u7D22_u5F15_u89E3_u51B3" class="headerlink" title="nexus 更新索引解决"></a>nexus 更新索引解决</h1><p>nexus更新索引方式有两种：</p>
-<h3 id="1-__u5728_u7EBF_u66F4_u65B0_u7D22_u5F15"><a href="#1-__u5728_u7EBF_u66F4_u65B0_u7D22_u5F15" class="headerlink" title="1. 在线更新索引"></a>1. 在线更新索引</h3><p>安装配置完成Nexus后，电脑联网状态下，Nexus会自动下载索引文件。下载好的索引文件存放在目录：sonatype-work\nexus\indexer,但由于下载速度慢、容量大，往往会以失败告终。</p>
-<h3 id="2-__u624B_u52A8_u66F4_u65B0_u7D22_u5F15"><a href="#2-__u624B_u52A8_u66F4_u65B0_u7D22_u5F15" class="headerlink" title="2. 手动更新索引"></a>2. 手动更新索引</h3><p>2.1 首先准备以下几个文件：</p>
-<ul>
-<li><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.apache.maven.indexer" target="_blank" rel="external">indexer-cli-5.1.1.jar</a>  </li>
-<li><a href="http://repo1.maven.org/maven2/.index/nexus-maven-repository-index.zip" target="_blank" rel="external">nexus-maven-repository-index.gz</a>  </li>
-<li><a href="http://repo1.maven.org/maven2/.index/nexus-maven-repository-index.properties" target="_blank" rel="external">nexus-maven-repository-index.properties</a></li>
-</ul>
-<p>注： <code>indexer-cli-5.1.1.jar</code> 进入 <a href="http://search.maven.org/" target="_blank" rel="external">http://search.maven.org/</a><br>后输入关键字<code>org.apache.maven.indexer</code>进行搜索，如下图，找到相关的jar包进行下载。<br><img src="/images/001.png" alt=""></p>
-<p>2.2<br>1). 下载完成后把三个文件放在同一个文件路径下面，从cmd进入到这个路径里，输入命令：<br><strong>java -jar indexer-cli-5.1.1.jar -u nexus-maven-repository-index.gz -d indexer</strong><br>执行完之后，把indexer文件夹下的所有内容都复制到<strong>%nexus-home%\sonatype-work\nexus\indexer\central-ctx</strong>下面。<br>2). 重新启动nexus，进入管理界面，选择central-&gt;Browse Index，就看到更新的索引了。</p>
-<p><strong>注意</strong>：nexus是需要重新启动的，我是在做上面的所有步骤之前，先停掉nexus，等上面四个步骤完成之后，再启动nexus的。</p>
-<h3 id="3-__u4EE3_u7406_u670D_u52A1_u5668_u66F4_u65B0_u7D22_u5F15"><a href="#3-__u4EE3_u7406_u670D_u52A1_u5668_u66F4_u65B0_u7D22_u5F15" class="headerlink" title="3. 代理服务器更新索引"></a>3. 代理服务器更新索引</h3><blockquote>
-<p>以下参考地址：<a href="http://my.oschina.net/u/811979/blog/373416" target="_blank" rel="external">http://my.oschina.net/u/811979/blog/373416</a></p>
-</blockquote>
-<p>3.1 同样下载以下两个文件  </p>
-<ul>
-<li><a href="http://repo1.maven.org/maven2/.index/nexus-maven-repository-index.zip" target="_blank" rel="external">nexus-maven-repository-index.gz</a>  </li>
-<li><a href="http://repo1.maven.org/maven2/.index/nexus-maven-repository-index.properties" target="_blank" rel="external">nexus-maven-repository-index.properties</a></li>
-</ul>
-<p>3.2 配置代理服务器<br>找一个服务器（<strong>Apache</strong>或者<strong>Tomcat</strong>等，只要是server就行），在其根目录（ROOT）下建立一个 /maven2/.index 的虚拟目录.  </p>
-<p><strong>注意</strong>: 如果你使用的是windows, 可能无法建立.index文件夹, 在cmd下使用mkdir 命令可创建)，把上述两个文件拷贝至该目录下;修改服务器端口为80.  </p>
-<p>3.3 编辑 c:\WINDOWS\system32\drivers\etc\hosts 文件，在文件中加入： 127.0.0.1 repo1.maven.org 注：127.0.0.1 为步骤2的Apache Tomcat服务器IP地址  </p>
-<p>3.4 登陆Nexus， 在远程仓库上右键选择Update Index即可   </p>
-<p>3.5 移除之前在 hosts 文件中添加的内容。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/02/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-02T15:33:17+08:00" content="2016-02-02">
-              2016-02-02
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/02/02/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/02/hello-world/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+<h3 id="u4E00-__u5B89_u88C5_u73AF_u5883_u4ECB_u7ECD"><a href="#u4E00-__u5B89_u88C5_u73AF_u5883_u4ECB_u7ECD" class="headerlink" title="一. 安装环境介绍"></a>一. 安装环境介绍</h3><h3 id="u4E8C-__u5B89_u88C5_u524D_u51C6_u5907"><a href="#u4E8C-__u5B89_u88C5_u524D_u51C6_u5907" class="headerlink" title="二. 安装前准备"></a>二. 安装前准备</h3><h3 id="u4E09-__u5B89_u88C5_u6B65_u9AA4"><a href="#u4E09-__u5B89_u88C5_u6B65_u9AA4" class="headerlink" title="三. 安装步骤"></a>三. 安装步骤</h3><h3 id="u56DB-__u6D4B_u8BD5_u9A8C_u8BC1"><a href="#u56DB-__u6D4B_u8BD5_u9A8C_u8BC1" class="headerlink" title="四. 测试验证"></a>四. 测试验证</h3>
           
         
       
@@ -1492,6 +1456,10 @@ the Guest Additions kernel module.
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1530,7 +1498,7 @@ the Guest Additions kernel module.
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1540,7 +1508,7 @@ the Guest Additions kernel module.
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

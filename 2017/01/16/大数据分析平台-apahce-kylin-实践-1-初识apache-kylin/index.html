@@ -84,37 +84,21 @@
 
 
 
-<meta name="description" content="一. apache kylin 简介
-二. Apache kylin 的工作机制
-三. 小结-kylin的优劣
-四. 实践场景思考-水资源取水户统计分析场景
-五. 场景演示
-Apache kylin是什么Apache kylin 是一个开源的分布式分析引擎。它通过ANSI-SQL接口，提供基于hadoop的超大数据集（TB-PB级）的多维分析（OLAP）功能。
-只需三步，kylin即可实现超大数据">
+<meta name="description" content="一. apache kylin 简介 二. Apache kylin 的工作机制 三. 小结-kylin的优劣 四. 实践场景思考-水资源取水户统计分析场景 五. 场景演示 Apache kylin是什么Apache kylin 是一个开源的分布式分析引擎。它通过ANSI-SQL接口，提供基于hadoop的超大数据集（TB-PB级）的多维分析（OLAP）功能。 只需三步，kylin即可实现超大数据">
+<meta name="keywords" content="mysql,sql,分析,大数据 kylin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="大数据分析平台 apahce kylin 实践-1.初识apache kylin">
 <meta property="og:url" content="https://scai2013.github.io/2017/01/16/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/index.html">
 <meta property="og:site_name" content="小蔡的日志">
-<meta property="og:description" content="一. apache kylin 简介
-二. Apache kylin 的工作机制
-三. 小结-kylin的优劣
-四. 实践场景思考-水资源取水户统计分析场景
-五. 场景演示
-Apache kylin是什么Apache kylin 是一个开源的分布式分析引擎。它通过ANSI-SQL接口，提供基于hadoop的超大数据集（TB-PB级）的多维分析（OLAP）功能。
-只需三步，kylin即可实现超大数据">
+<meta property="og:description" content="一. apache kylin 简介 二. Apache kylin 的工作机制 三. 小结-kylin的优劣 四. 实践场景思考-水资源取水户统计分析场景 五. 场景演示 Apache kylin是什么Apache kylin 是一个开源的分布式分析引擎。它通过ANSI-SQL接口，提供基于hadoop的超大数据集（TB-PB级）的多维分析（OLAP）功能。 只需三步，kylin即可实现超大数据">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://scai2013.github.io/images/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/kylin_diagram.png">
 <meta property="og:image" content="https://scai2013.github.io/images/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/compare.png">
 <meta property="og:image" content="https://scai2013.github.io/images/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/waterPro.png">
 <meta property="og:updated_time" content="2017-01-17T08:25:24.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="大数据分析平台 apahce kylin 实践-1.初识apache kylin">
-<meta name="twitter:description" content="一. apache kylin 简介
-二. Apache kylin 的工作机制
-三. 小结-kylin的优劣
-四. 实践场景思考-水资源取水户统计分析场景
-五. 场景演示
-Apache kylin是什么Apache kylin 是一个开源的分布式分析引擎。它通过ANSI-SQL接口，提供基于hadoop的超大数据集（TB-PB级）的多维分析（OLAP）功能。
-只需三步，kylin即可实现超大数据">
+<meta name="twitter:description" content="一. apache kylin 简介 二. Apache kylin 的工作机制 三. 小结-kylin的优劣 四. 实践场景思考-水资源取水户统计分析场景 五. 场景演示 Apache kylin是什么Apache kylin 是一个开源的分布式分析引擎。它通过ANSI-SQL接口，提供基于hadoop的超大数据集（TB-PB级）的多维分析（OLAP）功能。 只需三步，kylin即可实现超大数据">
 <meta name="twitter:image" content="https://scai2013.github.io/images/大数据分析平台-apahce-kylin-实践-1-初识apache-kylin/kylin_diagram.png">
 
 
@@ -430,16 +414,16 @@ Apache kylin是什么Apache kylin 是一个开源的分布式分析引擎。它�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/03/python笔记01/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2016/10/04/数据库优化-mysql调优化思路01/" rel="next" title="mysql数据库-调优优化思路01">
+                <i class="fa fa-chevron-left"></i> mysql数据库-调优优化思路01
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/01/elasticsearch-笔记/" rel="prev" title="elasticsearch 笔记">
-                elasticsearch 笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/27/IOT-platform/" rel="prev" title="IOT-platform">
+                IOT-platform <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -512,7 +496,7 @@ Apache kylin是什么Apache kylin 是一个开源的分布式分析引擎。它�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -522,7 +506,7 @@ Apache kylin是什么Apache kylin 是一个开源的分布式分析引擎。它�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

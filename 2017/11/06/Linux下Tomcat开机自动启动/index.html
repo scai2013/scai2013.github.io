@@ -1,0 +1,782 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Linux下tomcat开机自动启动有两种方法，一种是简单，一种是复杂而又专业的，使用shell脚本要实现，我们一般推荐shell脚本启动方式。下面我们分别介绍这两种方法。1.shell脚本启动众所周知，在Linux中设置开机自启动的服务，需要在/etc/rcX.d下挂载。除此之外还需要在/etc/init.d下些启动脚本。其实很简单，先export出所需要的环境变量，例如JAVA_HOME，JR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux下Tomcat开机自动启动">
+<meta property="og:url" content="https://scai2013.github.io/2017/11/06/Linux下Tomcat开机自动启动/index.html">
+<meta property="og:site_name" content="小蔡的日志">
+<meta property="og:description" content="Linux下tomcat开机自动启动有两种方法，一种是简单，一种是复杂而又专业的，使用shell脚本要实现，我们一般推荐shell脚本启动方式。下面我们分别介绍这两种方法。1.shell脚本启动众所周知，在Linux中设置开机自启动的服务，需要在/etc/rcX.d下挂载。除此之外还需要在/etc/init.d下些启动脚本。其实很简单，先export出所需要的环境变量，例如JAVA_HOME，JR">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-06T01:57:08.811Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux下Tomcat开机自动启动">
+<meta name="twitter:description" content="Linux下tomcat开机自动启动有两种方法，一种是简单，一种是复杂而又专业的，使用shell脚本要实现，我们一般推荐shell脚本启动方式。下面我们分别介绍这两种方法。1.shell脚本启动众所周知，在Linux中设置开机自启动的服务，需要在/etc/rcX.d下挂载。除此之外还需要在/etc/init.d下些启动脚本。其实很简单，先export出所需要的环境变量，例如JAVA_HOME，JR">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://scai2013.github.io/2017/11/06/Linux下Tomcat开机自动启动/"/>
+
+  <title> Linux下Tomcat开机自动启动 | 小蔡的日志 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小蔡的日志</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">技术笔记</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux下Tomcat开机自动启动
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-06T09:48:23+08:00" content="2017-11-06">
+              2017-11-06
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/06/Linux下Tomcat开机自动启动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/06/Linux下Tomcat开机自动启动/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Linux下tomcat开机自动启动有两种方法，一种是简单，一种是复杂而又专业的，使用shell脚本要实现，我们一般推荐shell脚本启动方式。下面我们分别介绍这两种方法。<br>1.shell脚本启动<br>众所周知，在Linux中设置开机自启动的服务，需要在/etc/rcX.d下挂载。除此之外还需要在/etc/init.d下些启动脚本。其实很简单，先export出所需要的环境变量，例如JAVA_HOME，JRE_HOME, CATALINA_HOME, CATALINA_BASE什么的，然后再直接调用$CATALINA_HOME/bin/startup.sh就能成功启动。<br>第一步：我们在/etc/init.d下新建一个文件tomcat（需要在root权限下操作）   </p>
+<blockquote>
+<p>vi /etc/init.d/tomcat   </p>
+</blockquote>
+<p>写下如下代码，tomcat自启动脚本：  </p>
+<blockquote>
+<p>#!/bin/sh<br># chkconfig: 345 99 10<br># description: Auto-starts tomcat<br># /etc/init.d/tomcatd<br># Tomcat auto-start<br># Source function library.<br>#. /etc/init.d/functions<br># source networking configuration.<br>#. /etc/sysconfig/network<br>RETVAL=0<br>export JAVA_HOME=/usr/java/jdk1.7.0_60<br>export JRE_HOME=/usr/java/jdk1.7.0_60/jre<br>export CATALINA_HOME=/usr/local/tomcat<br>export CATALINA_BASE=/usr/local/tomcat<br>start()<br>{<br>        if [ -f $CATALINA_HOME/bin/startup.sh ];<br>          then<br>            echo $”Starting Tomcat”<br>                $CATALINA_HOME/bin/startup.sh<br>            RETVAL=$?<br>            echo “ OK”<br>            return $RETVAL<br>        fi<br>}<br>stop()<br>{<br>        if [ -f $CATALINA_HOME/bin/shutdown.sh ];<br>          then<br>            echo $”Stopping Tomcat”<br>                $CATALINA_HOME/bin/shutdown.sh<br>            RETVAL=$?<br>            sleep 1<br>            ps -fwwu root | grep tomcat|grep -v grep | grep -v PID | awk ‘{print $2}’|xargs kill -9<br>            echo “ OK”  </p>
+<pre><code>    # [ $RETVAL -eq 0 ] &amp;&amp; rm -f /var/lock/...  
+    return $RETVAL  
+fi  
+</code></pre><p>}<br>case “$1” in<br> start)<br>        start<br>        ;;<br> stop)<br>        stop<br>        ;;<br> restart)<br>         echo $”Restaring Tomcat”<br>         $0 stop<br>         sleep 1<br>         $0 start<br>         ;;<br> *)<br>        echo $”Usage: $0 {start|stop|restart}”<br>        exit 1<br>        ;;<br>esac<br>exit $RETVAL  </p>
+</blockquote>
+<p>这里特别提醒注意这一句ps -fwwu root | grep tomcat|grep -v grep | grep -v PID | awk ‘{print $2}’|xargs kill -9，熟悉Linux命令的人应该都清楚这句话的意义，这里就简单说下前半部分，查询root用户下tomcat的进程PID，个人根据实际情况修改。<br>第二步：保存退出之后，给其增加可执行权限  </p>
+<blockquote>
+<p>chmod +x /etc/init.d/tomcat</p>
+</blockquote>
+<p>第三步：挂载<br> 将这个shell文件的link连到/etc/rc2.d/目录下。linux的/etc/rcX.d/目录中的数字代表开机启动时不同的run level，也就是启动的顺序，Ubuntu9.10下有0-5六个level，不能随便连到其他目录下，可能在那个目录中的程序启动时Tomcat所需要的一些库尚未被加载，用ln命令将tomcat的链接链过去：sudo<br> ln -s /etc/init.d/tomcat /etc/rc2.d/S16Tomcat。rcX.d目录下的命名规则是很有讲究的，更具不同需要可能是S开头，也可能是K开头，之后的数字代表他们的启动顺序，详细看各自目录下的Readme文件。  </p>
+<blockquote>
+<p>ln -s /etc/init.d/tomcat /etc/rc2.d/S16Tomcat   </p>
+</blockquote>
+<p>第四步：设置脚本开机自启动<br>把这个脚本设置成系统启动时自动执行，系统关闭时自动停止，使用如下命令: </p>
+<blockquote>
+<p>chkconfig –add tomcat  </p>
+</blockquote>
+<p>第五步：验证<br>执行 sudo reboot。重启之后就会发现，Tomcat已经成功运行了。<br>题外话：添加这个脚本之后我们启动，停止，重启tomcat可以直接用命令  </p>
+<blockquote>
+<p>service tomcat start<br>service tomcat stop<br>service tomcat restart<br>另外一些tomcat设置命令有： chkconfig –list tomcat      chkconfig  tomcat on，大家可以试试看有什么效果。  </p>
+</blockquote>
+<p>2.修改系统文件<br>1.修改/etc/rc.d/rc.local   </p>
+<blockquote>
+<p>vi /etc/rc.d/rc.local<br>2.添加下面两行脚本，记住是两行，仅仅第二行不行，必须加第一行。在/etc/rc.d/rc.local文件最后加上<br>export JAVA_HOME=/usr/java/jdk1.7.0_60<br>/usr/local/tomcat/bin/startup.sh start    </p>
+</blockquote>
+<p>说明：/usr/java/jdk1.7.0_60 是jdk安装目录<br>/usr/local/tomcat是tomcat安装的目录  </p>
+<p>3.注意:修改rc.local文件为可执行</p>
+<blockquote>
+<p>chmod +x  rc.local    </p>
+</blockquote>
+<p>第一种shell脚本的方式实现tomcat的开机自启动已经实践过，第二种没用过，只是在网上搜到有这方面的资料，所以记录下来，方便以后学习。如果想了解更多请参考文档：<br><a href="http://www.cnblogs.com/gnorts/archive/2010/11/24/1886771.html" target="_blank" rel="external">http://www.cnblogs.com/gnorts/archive/2010/11/24/1886771.html</a><br><a href="http://jingyan.baidu.com/article/1612d50079cfe5e20f1eee71.html" target="_blank" rel="external">http://jingyan.baidu.com/article/1612d50079cfe5e20f1eee71.html</a><br><a href="http://blog.csdn.net/wangli61289/article/details/37924785" target="_blank" rel="external">http://blog.csdn.net/wangli61289/article/details/37924785</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/23/VritualBox-UUID-have-already-exists/" rel="next" title="VritualBox UUID have already exists">
+                <i class="fa fa-chevron-left"></i> VritualBox UUID have already exists
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/14/Windows下设置VirtualBox中Linux共享文件夹/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/11/06/Linux下Tomcat开机自动启动/"
+           data-title="Linux下Tomcat开机自动启动" data-url="https://scai2013.github.io/2017/11/06/Linux下Tomcat开机自动启动/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/cook.jpg"
+               alt="jubn cai" />
+          <p class="site-author-name" itemprop="name">jubn cai</p>
+          <p class="site-description motion-element" itemprop="description">写我所写，随心所欲</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jubn cai</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"scai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
