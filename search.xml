@@ -5,13 +5,13 @@
     
     <entry>
       <title></title>
-      <url>https://scai2013.github.io/2017/11/14/Windows%E4%B8%8B%E8%AE%BE%E7%BD%AEVirtualBox%E4%B8%ADLinux%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</url>
+      <url>https://scai2013.github.io/2017/11/14/VirtualBox-shared/</url>
       <content type="html"><![CDATA[<p>title: Windows下设置VirtualBox中Linux共享文件夹<br>date: 2017-11-14 09:59:53</p>
 <h2 id="tags_3A__5BVirtualBox_2C_u5BBF_u4E3B_u673A_2C_u5171_u4EAB_2Clinux_2Cwindows_5D"><a href="#tags_3A__5BVirtualBox_2C_u5BBF_u4E3B_u673A_2C_u5171_u4EAB_2Clinux_2Cwindows_5D" class="headerlink" title="tags: [VirtualBox,宿主机,共享,linux,windows]"></a>tags: [VirtualBox,宿主机,共享,linux,windows]</h2><p>###1. 安装增强功能包(Guest Additions)<br>安装好linux后正常登录，在VirtualBox的菜单里选择  </p>
 <blockquote>
 <p>“设备(Devices)” -&gt; “安装增强功能包(Install Guest Additions)”。  </p>
 </blockquote>
-<p>你会发现在Ubuntu桌面上多出一个光盘图标。<br><img src="/2017/11/14/Windows下设置VirtualBox中Linux共享文件夹/001.png" alt=""><br>这张光盘默认被自动加载到了文件夹/media/cdom0。若有界面操作可以直接运行光盘，或者进入命令行终端，输入：</p>
+<p>你会发现在Ubuntu桌面上多出一个光盘图标。<br><img src="/2017/11/14/VirtualBox-shared/001.png" alt=""><br>这张光盘默认被自动加载到了文件夹/media/cdom0。若有界面操作可以直接运行光盘，或者进入命令行终端，输入：</p>
 <blockquote>
 <p>cd /media/cdom0<br>./VboxLinuxAdditions.run</p>
 </blockquote>
@@ -24,7 +24,7 @@
 <blockquote>
 <p>“设备(Devices)” -&gt; 共享文件夹(Shared Folders)菜单  </p>
 </blockquote>
-<p>添加一个共享文件夹，选项固定和临时是指该文件夹是否是持久的。共享名可以任取一个自己喜欢的，比如”gongxiang”，尽量使用英文名称。<br><img src="/2017/11/14/Windows下设置VirtualBox中Linux共享文件夹/002.png" alt=""> </p>
+<p>添加一个共享文件夹，选项固定和临时是指该文件夹是否是持久的。共享名可以任取一个自己喜欢的，比如”gongxiang”，尽量使用英文名称。<br><img src="/2017/11/14/VirtualBox-shared/002.png" alt=""> </p>
 <p>###3. 挂载共享文件夹</p>
 <p>重新进入虚拟系统，在命令行终端下输入：</p>
 <blockquote>

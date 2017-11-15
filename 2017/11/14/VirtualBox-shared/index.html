@@ -84,17 +84,20 @@
 
 
 
-<meta name="description" content="Linux下tomcat开机自动启动有两种方法，一种是简单，一种是复杂而又专业的，使用shell脚本要实现，我们一般推荐shell脚本启动方式。下面我们分别介绍这两种方法。1.shell脚本启动众所周知，在Linux中设置开机自启动的服务，需要在/etc/rcX.d下挂载。除此之外还需要在/etc/init.d下些启动脚本。其实很简单，先export出所需要的环境变量，例如JAVA_HOME，JR">
+<meta name="description" content="title: Windows下设置VirtualBox中Linux共享文件夹date: 2017-11-14 09:59:53 tags: [VirtualBox,宿主机,共享,linux,windows]###1. 安装增强功能包(Guest Additions)安装好linux后正常登录，在VirtualBox的菜单里选择    “设备(Devices)” -&amp;gt; “安装增强功能包(Ins">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux下Tomcat开机自动启动">
-<meta property="og:url" content="https://scai2013.github.io/2017/11/06/Linux下Tomcat开机自动启动/index.html">
+<meta property="og:title" content="小蔡的日志">
+<meta property="og:url" content="https://scai2013.github.io/2017/11/14/VirtualBox-shared/index.html">
 <meta property="og:site_name" content="小蔡的日志">
-<meta property="og:description" content="Linux下tomcat开机自动启动有两种方法，一种是简单，一种是复杂而又专业的，使用shell脚本要实现，我们一般推荐shell脚本启动方式。下面我们分别介绍这两种方法。1.shell脚本启动众所周知，在Linux中设置开机自启动的服务，需要在/etc/rcX.d下挂载。除此之外还需要在/etc/init.d下些启动脚本。其实很简单，先export出所需要的环境变量，例如JAVA_HOME，JR">
+<meta property="og:description" content="title: Windows下设置VirtualBox中Linux共享文件夹date: 2017-11-14 09:59:53 tags: [VirtualBox,宿主机,共享,linux,windows]###1. 安装增强功能包(Guest Additions)安装好linux后正常登录，在VirtualBox的菜单里选择    “设备(Devices)” -&amp;gt; “安装增强功能包(Ins">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-06T01:57:08.811Z">
+<meta property="og:image" content="https://scai2013.github.io/2017/11/14/VirtualBox-shared/001.png">
+<meta property="og:image" content="https://scai2013.github.io/2017/11/14/VirtualBox-shared/002.png">
+<meta property="og:updated_time" content="2017-11-14T02:14:47.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux下Tomcat开机自动启动">
-<meta name="twitter:description" content="Linux下tomcat开机自动启动有两种方法，一种是简单，一种是复杂而又专业的，使用shell脚本要实现，我们一般推荐shell脚本启动方式。下面我们分别介绍这两种方法。1.shell脚本启动众所周知，在Linux中设置开机自启动的服务，需要在/etc/rcX.d下挂载。除此之外还需要在/etc/init.d下些启动脚本。其实很简单，先export出所需要的环境变量，例如JAVA_HOME，JR">
+<meta name="twitter:title" content="小蔡的日志">
+<meta name="twitter:description" content="title: Windows下设置VirtualBox中Linux共享文件夹date: 2017-11-14 09:59:53 tags: [VirtualBox,宿主机,共享,linux,windows]###1. 安装增强功能包(Guest Additions)安装好linux后正常登录，在VirtualBox的菜单里选择    “设备(Devices)” -&amp;gt; “安装增强功能包(Ins">
+<meta name="twitter:image" content="https://scai2013.github.io/2017/11/14/VirtualBox-shared/001.png">
 
 
 
@@ -115,9 +118,9 @@
 
 
 
-  <link rel="canonical" href="https://scai2013.github.io/2017/11/06/Linux下Tomcat开机自动启动/"/>
+  <link rel="canonical" href="https://scai2013.github.io/2017/11/14/VirtualBox-shared/"/>
 
-  <title> Linux下Tomcat开机自动启动 | 小蔡的日志 </title>
+  <title>  | 小蔡的日志 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +263,7 @@
             
             
               
-                Linux下Tomcat开机自动启动
+                
               
             
           </h1>
@@ -272,8 +275,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-11-06T09:48:23+08:00" content="2017-11-06">
-              2017-11-06
+            <time itemprop="dateCreated" datetime="2017-11-14T09:59:53+08:00" content="2017-11-14">
+              2017-11-14
             </time>
           </span>
 
@@ -283,8 +286,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/11/06/Linux下Tomcat开机自动启动/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/06/Linux下Tomcat开机自动启动/" itemprop="commentsCount"></span>
+                <a href="/2017/11/14/VirtualBox-shared/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/14/VirtualBox-shared/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -307,44 +310,41 @@
       
 
       
-        <p>Linux下tomcat开机自动启动有两种方法，一种是简单，一种是复杂而又专业的，使用shell脚本要实现，我们一般推荐shell脚本启动方式。下面我们分别介绍这两种方法。<br>1.shell脚本启动<br>众所周知，在Linux中设置开机自启动的服务，需要在/etc/rcX.d下挂载。除此之外还需要在/etc/init.d下些启动脚本。其实很简单，先export出所需要的环境变量，例如JAVA_HOME，JRE_HOME, CATALINA_HOME, CATALINA_BASE什么的，然后再直接调用$CATALINA_HOME/bin/startup.sh就能成功启动。<br>第一步：我们在/etc/init.d下新建一个文件tomcat（需要在root权限下操作）   </p>
+        <p>title: Windows下设置VirtualBox中Linux共享文件夹<br>date: 2017-11-14 09:59:53</p>
+<h2 id="tags_3A__5BVirtualBox_2C_u5BBF_u4E3B_u673A_2C_u5171_u4EAB_2Clinux_2Cwindows_5D"><a href="#tags_3A__5BVirtualBox_2C_u5BBF_u4E3B_u673A_2C_u5171_u4EAB_2Clinux_2Cwindows_5D" class="headerlink" title="tags: [VirtualBox,宿主机,共享,linux,windows]"></a>tags: [VirtualBox,宿主机,共享,linux,windows]</h2><p>###1. 安装增强功能包(Guest Additions)<br>安装好linux后正常登录，在VirtualBox的菜单里选择  </p>
 <blockquote>
-<p>vi /etc/init.d/tomcat   </p>
+<p>“设备(Devices)” -&gt; “安装增强功能包(Install Guest Additions)”。  </p>
 </blockquote>
-<p>写下如下代码，tomcat自启动脚本：  </p>
+<p>你会发现在Ubuntu桌面上多出一个光盘图标。<br><img src="/2017/11/14/VirtualBox-shared/001.png" alt=""><br>这张光盘默认被自动加载到了文件夹/media/cdom0。若有界面操作可以直接运行光盘，或者进入命令行终端，输入：</p>
 <blockquote>
-<p>#!/bin/sh<br># chkconfig: 345 99 10<br># description: Auto-starts tomcat<br># /etc/init.d/tomcatd<br># Tomcat auto-start<br># Source function library.<br>#. /etc/init.d/functions<br># source networking configuration.<br>#. /etc/sysconfig/network<br>RETVAL=0<br>export JAVA_HOME=/usr/java/jdk1.7.0_60<br>export JRE_HOME=/usr/java/jdk1.7.0_60/jre<br>export CATALINA_HOME=/usr/local/tomcat<br>export CATALINA_BASE=/usr/local/tomcat<br>start()<br>{<br>        if [ -f $CATALINA_HOME/bin/startup.sh ];<br>          then<br>            echo $”Starting Tomcat”<br>                $CATALINA_HOME/bin/startup.sh<br>            RETVAL=$?<br>            echo “ OK”<br>            return $RETVAL<br>        fi<br>}<br>stop()<br>{<br>        if [ -f $CATALINA_HOME/bin/shutdown.sh ];<br>          then<br>            echo $”Stopping Tomcat”<br>                $CATALINA_HOME/bin/shutdown.sh<br>            RETVAL=$?<br>            sleep 1<br>            ps -fwwu root | grep tomcat|grep -v grep | grep -v PID | awk ‘{print $2}’|xargs kill -9<br>            echo “ OK”  </p>
-<pre><code>    # [ $RETVAL -eq 0 ] &amp;&amp; rm -f /var/lock/...  
-    return $RETVAL  
-fi  
-</code></pre><p>}<br>case “$1” in<br> start)<br>        start<br>        ;;<br> stop)<br>        stop<br>        ;;<br> restart)<br>         echo $”Restaring Tomcat”<br>         $0 stop<br>         sleep 1<br>         $0 start<br>         ;;<br> *)<br>        echo $”Usage: $0 {start|stop|restart}”<br>        exit 1<br>        ;;<br>esac<br>exit $RETVAL  </p>
+<p>cd /media/cdom0<br>./VboxLinuxAdditions.run</p>
 </blockquote>
-<p>这里特别提醒注意这一句ps -fwwu root | grep tomcat|grep -v grep | grep -v PID | awk ‘{print $2}’|xargs kill -9，熟悉Linux命令的人应该都清楚这句话的意义，这里就简单说下前半部分，查询root用户下tomcat的进程PID，个人根据实际情况修改。<br>第二步：保存退出之后，给其增加可执行权限  </p>
+<p>开始安装工具包。安装完毕后会提示要重启系统，重启：</p>
 <blockquote>
-<p>chmod +x /etc/init.d/tomcat</p>
+<p>reboot</p>
 </blockquote>
-<p>第三步：挂载<br> 将这个shell文件的link连到/etc/rc2.d/目录下。linux的/etc/rcX.d/目录中的数字代表开机启动时不同的run level，也就是启动的顺序，Ubuntu9.10下有0-5六个level，不能随便连到其他目录下，可能在那个目录中的程序启动时Tomcat所需要的一些库尚未被加载，用ln命令将tomcat的链接链过去：sudo<br> ln -s /etc/init.d/tomcat /etc/rc2.d/S16Tomcat。rcX.d目录下的命名规则是很有讲究的，更具不同需要可能是S开头，也可能是K开头，之后的数字代表他们的启动顺序，详细看各自目录下的Readme文件。  </p>
+<p>###2. 设置共享文件夹</p>
+<p>重启完成后点击  </p>
 <blockquote>
-<p>ln -s /etc/init.d/tomcat /etc/rc2.d/S16Tomcat   </p>
+<p>“设备(Devices)” -&gt; 共享文件夹(Shared Folders)菜单  </p>
 </blockquote>
-<p>第四步：设置脚本开机自启动<br>把这个脚本设置成系统启动时自动执行，系统关闭时自动停止，使用如下命令: </p>
+<p>添加一个共享文件夹，选项固定和临时是指该文件夹是否是持久的。共享名可以任取一个自己喜欢的，比如”gongxiang”，尽量使用英文名称。<br><img src="/2017/11/14/VirtualBox-shared/002.png" alt=""> </p>
+<p>###3. 挂载共享文件夹</p>
+<p>重新进入虚拟系统，在命令行终端下输入：</p>
 <blockquote>
-<p>chkconfig –add tomcat  </p>
+<p>mkdir /mnt/shared<br>mount -t vboxsf shared /mnt/shared</p>
 </blockquote>
-<p>第五步：验证<br>执行 sudo reboot。重启之后就会发现，Tomcat已经成功运行了。<br>题外话：添加这个脚本之后我们启动，停止，重启tomcat可以直接用命令  </p>
+<p>其中”shared”是之前创建的共享文件夹的名字。OK，现在虚拟系统和主机可以互传文件了</p>
+<p>###4.设置自动挂载</p>
+<p>假如不想每一次都手动挂载，可以在/etc/fstab中添加一项</p>
 <blockquote>
-<p>service tomcat start<br>service tomcat stop<br>service tomcat restart<br>另外一些tomcat设置命令有： chkconfig –list tomcat      chkconfig  tomcat on，大家可以试试看有什么效果。  </p>
+<p>shared /mnt/shared vboxsf rw,gid=100,uid=1000,auto 0 0</p>
 </blockquote>
-<p>2.修改系统文件<br>1.修改/etc/rc.d/rc.local   </p>
+<p>这样就能够自动挂载了。</p>
+<p>###5. 卸载<br>卸载的话使用下面的命令</p>
 <blockquote>
-<p>vi /etc/rc.d/rc.local<br>2.添加下面两行脚本，记住是两行，仅仅第二行不行，必须加第一行。在/etc/rc.d/rc.local文件最后加上<br>export JAVA_HOME=/usr/java/jdk1.7.0_60<br>/usr/local/tomcat/bin/startup.sh start    </p>
+<p>umount -f /mnt/shared</p>
 </blockquote>
-<p>说明：/usr/java/jdk1.7.0_60 是jdk安装目录<br>/usr/local/tomcat是tomcat安装的目录  </p>
-<p>3.注意:修改rc.local文件为可执行</p>
-<blockquote>
-<p>chmod +x  rc.local    </p>
-</blockquote>
-<p>第一种shell脚本的方式实现tomcat的开机自启动已经实践过，第二种没用过，只是在网上搜到有这方面的资料，所以记录下来，方便以后学习。如果想了解更多请参考文档：<br><a href="http://www.cnblogs.com/gnorts/archive/2010/11/24/1886771.html" target="_blank" rel="external">http://www.cnblogs.com/gnorts/archive/2010/11/24/1886771.html</a><br><a href="http://jingyan.baidu.com/article/1612d50079cfe5e20f1eee71.html" target="_blank" rel="external">http://jingyan.baidu.com/article/1612d50079cfe5e20f1eee71.html</a><br><a href="http://blog.csdn.net/wangli61289/article/details/37924785" target="_blank" rel="external">http://blog.csdn.net/wangli61289/article/details/37924785</a></p>
 
       
     </div>
@@ -370,17 +370,13 @@ fi
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/23/VritualBox-UUID-have-already-exists/" rel="next" title="VritualBox UUID have already exists">
-                <i class="fa fa-chevron-left"></i> VritualBox UUID have already exists
+              <a href="/2017/11/06/Linux下Tomcat开机自动启动/" rel="next" title="Linux下Tomcat开机自动启动">
+                <i class="fa fa-chevron-left"></i> Linux下Tomcat开机自动启动
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/14/VirtualBox-shared/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -406,8 +402,8 @@ fi
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/11/06/Linux下Tomcat开机自动启动/"
-           data-title="Linux下Tomcat开机自动启动" data-url="https://scai2013.github.io/2017/11/06/Linux下Tomcat开机自动启动/">
+      <div class="ds-thread" data-thread-key="2017/11/14/VirtualBox-shared/"
+           data-title="" data-url="https://scai2013.github.io/2017/11/14/VirtualBox-shared/">
       </div>
     
   </div>
@@ -491,7 +487,7 @@ fi
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags_3A__5BVirtualBox_2C_u5BBF_u4E3B_u673A_2C_u5171_u4EAB_2Clinux_2Cwindows_5D"><span class="nav-number">1.</span> <span class="nav-text">tags: [VirtualBox,宿主机,共享,linux,windows]</span></a></li></ol></div>
             
           </div>
         </section>
